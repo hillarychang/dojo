@@ -10,7 +10,7 @@
         <div class="nav-links">
             <h1 class="nav-title">Dojonary</h1>
             <input type="text" placeholder="Search">
-            <button class="btn">Sign Out</button>
+            <button class="btn" onclick="logOut(this)">Sign Out</button>
         </div>
 
 
@@ -25,7 +25,7 @@
                         <h1>Jane Doe</h1>
                         <h3>noun</h3>
                         <p>Plural: ninjas</p>
-                        <button class="likes-btn">13 likes</button>
+                        <button class="likes-btn" onclick="alert('Ninja was liked')">13 likes</button>
                     </div>
                 </div>
                 <div class = top-2>
@@ -37,13 +37,13 @@
 
             <div class = "second-element">
                 <h1>Dojonary is defined by YOU</h1>
-                <button class="add-btn">Add definition</button>
+                <button class="add-btn" onclick="hide(this)">Add definition</button>
             </div>
 
 
         </div>
 
-
+        <script src="script.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,9 @@
 
 .nav-links input{
     border: 1px solid black;  
-    width: 300px;
+    width: 200px;
+    padding: 5px;
+    width: 350px;
 }
 
 .first-element{
@@ -14,6 +16,16 @@
     padding:20px;
     height: 150px;
     border: solid black 2px;
+    margin: 20px 20px 20px 50px;
+
+}
+
+.top-1 h3{
+    padding-bottom: 5px;
+}
+
+.top-1 button {
+    margin-top: 5px;
 }
 
 .top-1{
@@ -23,6 +35,7 @@
 .first-row{
     display:flex;
     padding:20px;
+    justify-content: center;
 }
 
 
@@ -50,4 +63,17 @@
     width: 300px;
     padding-top: 40px;
     
+}
+
+.second-element{
+    padding:20px;
+    width:250px;
+    height:auto;
+    border: solid black 2px;
+    margin: 20px 20px 20px 20px;
+
+}
+
+.second-element h1{
+    margin-bottom: 20px;
 }

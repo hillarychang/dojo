@@ -15,7 +15,7 @@ function changePet(id) {
 //drop down menu alert
 const select = document.getElementById('select');
 select.addEventListener('change', function handleChange(event) {
-    alert("You are looking for a: "+event.target.value);
+    alert("You are looking for a: "+select.options[select.selectedIndex].text);
 });
 
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Card</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="all">
+
+        <!-- nav bar -->
+        <!-- <div class="nav"> -->
+            <div class="nav-links">
+                <h1 class="nav-title">Pet Shelter</h1>
+                <ul>
+                    <li><a href="#">Find a Pet</a></li>
+                    <li><a href="#" class="active">About</a></li>
+                </ul>
+                <button class="btn">Donate</button>
+
+            </div>
+        <!-- </div> -->
+
+
+        <!-- *first row -->
+        <div class="first-row">
+            <!-- top section -->
+            <div class="TOP">
+                <div class="upper"></div>
+                <div class="title">
+                    <div>
+                        <img src="./icons/user-circle.png" class="first-pic">
+                        <h1 class = "num3">Jane Doe</h1>
+                    </div>
+                    <div class="sec-pic">
+                        <img src="./icons/map-marker.png">
+                        <h3>Seattle</h3>
+                    </div>
+
+                    <div class="text">
+                        <p>Developer | Engineer | Problem Solver</p>
+                    </div>
+
+                    <p class="desc">Master of shadows and the Internet!</p>
+                    
+                    <div class = "bottom">
+                        <img src="./icons/gear.png" class="img3">
+                        <a href="#" onclick="changeName('.num3')">edit profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--TOP RIGHT  -->
+            <div class="TOP-RIGHT">
+                <div class = "top-icon">
+                    <p class = "two">2</p>
+                    <h4 class = "connection-rqsts">Connection Requests</h4>
+                </div>
+
+                <div class = 'row2'>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Todd E</h4>
+                    <div class = "yes-no">
+                        <img src="./icons/accept-circle.png" class="yes-icon" onclick="removeThing('.row2')"> 
+                        <img src="./icons/close-circle.png" class="no-icon" onclick="removeThing('.row2')">
+                    </div>
+                </div>
+                <div class = 'row3'>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Phil K</h4>
+                    <div class = "yes-no">
+                        <img src="./icons/accept-circle.png" class="yes-icon" onclick="removeThing('.row3')"> 
+                        <img src="./icons/close-circle.png" class="no-icon" onclick="removeThing('.row3')">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="sec-row">
+            <!--BOTTOM LEFT   -->
+            <div class="BOTTOM-LEFT">
+                <h2 class = "title-bg">Education</h2>
+                <div class = "para">
+                    <h3>Coding Dojo - Full Stack Bootcamp</h3>
+                    <p class="txt">Dec 2019 - Mar 2020</p>
+                    <h3>Triple black belt in Python, Mern, C#</h3>
+                </div>
+            </div>  
+
+
+
+            <!--BOTTOM RIGHT    -->
+            <div class="BOTTOM-RIGHT">
+                <div class = "top-icon2">
+                    <p class = "five-hundred">500+</p>
+                    <h4 class = "connection-rqsts">Your Connections</h4>
+                </div>
+
+                <div class = row2>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Adrien D</h4>
+                </div>
+                <div class = row3-second>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Anne J</h4>
+                </div>
+                <div class = row4>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Alayne T</h4>
+                </div>
+                <div class = row5>
+                    <img src="./icons/user-circle.png" class="user-icon">
+                    <h4>Arry Y</h4>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+

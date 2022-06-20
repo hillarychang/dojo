@@ -1,49 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Button Clicker</title>
+    <title>Exam 1</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-        <!-- nav bar -->
-        <div class="nav-links">
-            <h1 class="nav-title">Dojonary</h1>
-            <input type="text" placeholder="Search">
-            <button class="btn">Sign Out</button>
-        </div>
+            <!-- first part of nav bar -->
+            <div class="nav-first">
+                <img src = "./1621889799__assets/assets/heart-light.png"  alt="heart">
+                <h1 class="nav-title">Pet Shelter</h1>
+                <ul>
+                    <li><a href="#">Find a Pet</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <button class="btn" onclick = "hide(this)">Donate</button>
+            </div>
 
+            <!-- second part of nav bar -->
+            <div class="nav-second">
 
-
-        <!-- *first row -->
-        <div class="first-row">
-            <!-- top section -->
-
-            <div class = "first-element">
-                <div class="top-1">
-                    <div>
-                        <h1>Jane Doe</h1>
-                        <h3>noun</h3>
-                        <p>Plural: ninjas</p>
-                        <button class="likes-btn">13 likes</button>
+                <!-- first box -->
+                <div class = "first-box">
+                    <p>I'm looking for a...</p>
+                    <div class = "change1">    
+                        <img src = "./1621889799__assets/assets/paw-light.png"  alt="paw">
+                        <select name="select" id="select">
+                            <option value = "any-pet" class ="any-pet">Any Pet</option>
+                            <option value = "dog" class ="dog">Dog</option>
+                            <option value = "cat" class ="cat">Cat</option>
+                        </select>    
                     </div>
-                </div>
-                <div class = top-2>
-                    <div>
-                        <h3>A practitioner skilled in the Japanese art of ninjutsu</h3>
+                </div>                         
+
+
+                <!-- second box -->
+                <div class = "sec-box">
+                    <p>in or near a...</p>    
+                    <div class = "change2">
+                        <img src = "1621889799__assets/assets/pin-light.png"  alt="pin">
+                        <input type="text" id="city-zip" name="city-zip" placeholder="City of Zip Code" >
                     </div>
+                </div> 
+
+                <!-- purple button -->
+                <div >
+                    <button class = "sec-btn">Find you new best friend</button>
                 </div>
             </div>
 
-            <div class = "second-element">
-                <h1>Dojonary is defined by YOU</h1>
-                <button class="add-btn">Add definition</button>
+
+
+            <!-- body -->
+            <div class="middle">
+                <div class = "row1">
+                    <div>
+                        <img src = "1621889799__assets/assets/pepper.jpg"  alt="pepper">
+                    </div>
+                    <div class = "desc">
+                        <h1>Pepper</h1>
+                        <p>Pepper is a slightly shy grey tabby, but she really loves showing her human affection.</p>
+                    </div>
+                    <div class = "num-pet">
+                        <p><span class = "num">3</span> petting(s)</p>
+                        <button class="pet-btn" onclick="changePet('.num')">Pet Pepper</button>
+                    </div>
+                </div>
+
+
+                <div class = "row2">
+                    <div>
+                        <img src = "1621889799__assets/assets/bruce.jpg"  alt="bruce">
+                    </div>
+                    <div class = "desc">
+                        <h1>Bruce</h1>
+                        <p>Bruce is a loyal companion. He loves long walks and cold weather.</p>
+                    </div>
+                    <div class = "num-pet">
+                        <p><span class = "num2">5</span> petting(s)</p>
+                        <button class="pet-btn" onclick="changePet('.num2')">Pet Bruce</button>
+                    </div>
+                </div>
+
+
+
+                <div class = "row3">
+                    <div>
+                        <img src = "1621889799__assets/assets/oscar.jpg"  alt="oscar">
+                    </div>
+                    <div class = "desc">
+                        <h1>Oscar</h1>
+                        <p>Oscar is bright, energetic and friendly. He is looking for a good home.</p>
+                    </div>
+                    <div class = "num-pet">
+                        <p><span class = "num3">8</span> petting(s)</p>
+                        <button class="pet-btn" onclick="changePet('.num3')">Pet Oscar</button>
+                    </div>
+                </div>
+
+                
             </div>
-
-
-        </div>
-
-
-
+        <script src="script.js"></script>
 </body>
 </html>

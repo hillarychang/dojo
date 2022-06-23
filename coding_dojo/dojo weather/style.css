@@ -1,79 +1,198 @@
 *{
     margin:0px;
     padding: 0px;
-}
-
-
-.nav-links input{
-    border: 1px solid black;  
-    width: 200px;
-    padding: 5px;
-    width: 350px;
-}
-
-.first-element{
-    display:flex;
-    padding:20px;
-    height: 150px;
-    border: solid black 2px;
-    margin: 20px 20px 20px 50px;
+    font-family: sans-serif;
 
 }
 
-.top-1{
-    padding: 20px;
+/* NAVBAR */
+.nav-title{
+    width: 300px;
+    font-family: sans-serif;
 }
 
-.first-row{
-    display:flex;
-    padding:20px;
-    justify-content: center;
+a{
+    text-decoration: none;
+    color: white;
+
 }
 
+.pop-up{
+    margin-top: 30px;
+    /* position: fixed; */
+}
 
-.nav-links{
+.pop-up div{
+    width: 650px;
+    position: relative;
+    left: -100px;
+}
+
+.nav-first{
+    background-color: lightblue;
     display: flex;
-    justify-content: center;
-    background-color: grey;
+    height: 50px;
+    width: auto;
+    align-items: center;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+
+.nav-title{
+    /* display: inline-block; */
+    margin: 50px 50px 50px 30px;
+    color: rgb(235, 233, 233);
+}
+
+ul{
+    display: flex;
+    margin: 0px;
+    width: 1000px;
+    list-style: none;
+    justify-content: space-evenly;
+    /* margin-right: 20px; */
+}
+
+
+ul > li{
+    /* display: inline-block; */
+    font-size: 20px;
+    margin: 30px;
+    font-family: sans-serif;
+}
+
+
+.nav-second{
+    display:flex;   
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 20px 70px;
+    color: black;
+}
+
+.nav-second p{
+    position: relative;
+    left: 400px;
+}
+
+#select{
+    margin-right: 40px;
+}
+
+/* MIDDLE SECTION */
+.middle{
+    /* display:inline-block; */
+    display:flex;
+    justify-content: space-evenly;
+    /* border: 2px solid black;  */
+}
+
+.row1, .row2, .row3, .row4{
+    width: 260px;
+    height: auto;
+}
+
+.row1 h3,
+.row2 h3,
+.row3 h3,
+.row4 h3,
+.row1 p,
+.row2 p,
+.row3 p,
+.row4 p{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.row1 img,
+.row2 img,
+.row3 img,
+.row4 img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: 200px;
+}
+
+.row1{
+    background-color: lightgrey;
+    /* border: 2px solid black;  */
+
+
+}
+
+.numbers{
+    display:flex;
     justify-content: space-around;
     align-items: center;
-    padding:20px;
 }
 
-.btn{
+.first-p{
+
+}
+
+.sec-p{
+
+}
+
+
+
+/* second tile */
+.row2{
+    background-color: lightgrey;
+    /* border: 2px solid black;  */
+
+
+}
+
+/* third tile */
+.row3{
+    background-color: lightgrey;
+    /* border: 2px solid black;  */
+
+
+}
+
+
+/* fourth tile */
+.row4{
+    background-color: lightgrey;
+    /* border: 2px solid black;  */
+
+
+}
+
+
+.everything{
+    margin:0px 40px;
+}
+
+/* body{
+    margin:0px 40px;
+
+} */
+
+/* pop up */
+.pop-up{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 100px;
+    border: 2px solid black;  
+    margin: 40px 80px;
+
+}
+
+.pop-up a{
+    color:black;
+}
+
+.pop-up button{
     background-color: blue;
     color: white;
     margin-right: 30px;
     width: 80px;
     padding: 5px;
-
-}
-
-
-.top-2{
-    padding: 20px;
-    width: 300px;
-    padding-top: 40px;
-    
-}
-
-.second-element{
-    padding:20px;
-    width:250px;
-    height:auto;
-    border: solid black 2px;
-    margin: 20px 20px 20px 20px;
-
-}
-
-.second-element h1{
-    margin-bottom: 20px;
-}
-
-.top-1 h3{
-    padding-bottom: 5px;
-}
-
-.top-1 button {
-    margin-top: 5px;
 }

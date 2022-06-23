@@ -6,43 +6,92 @@
 </head>
 
 <body>
-        <!-- nav bar -->
-        <div class="nav-links">
-            <h1 class="nav-title">Dojonary</h1>
-            <input type="text" placeholder="Search">
-            <button class="btn">Sign Out</button>
-        </div>
 
 
-
-        <!-- *first row -->
-        <div class="first-row">
-            <!-- top section -->
-
-            <div class = "first-element">
-                <div class="top-1">
-                    <div>
-                        <h1>Jane Doe</h1>
-                        <h3>noun</h3>
-                        <p>Plural: ninjas</p>
-                        <button class="likes-btn">13 likes</button>
-                    </div>
-                </div>
-                <div class = top-2>
-                    <div>
-                        <h3>A practitioner skilled in the Japanese art of ninjutsu</h3>
-                    </div>
-                </div>
+            <!-- first part of nav bar -->
+            <div class="nav-first">
+                <h1 class="nav-title">Dojo Weather</h1>
+                <ul>
+                    <li onClick = "alert('ALERT')"><a href="#">Burbank</a></li>
+                    <li onClick = "alert('ALERT')"><a href="#">Chicago</a></li>
+                    <li onClick = "alert('ALERT')"><a href="#">Dallas</a></li>
+                </ul>
             </div>
 
-            <div class = "second-element">
-                <h1>Dojonary is defined by YOU</h1>
-                <button class="add-btn">Add definition</button>
+            <!-- second part of nav bar -->
+            <div class="nav-second">
+                <h1>San Jose </h1>
+                <p>Show temperature in </p>
+                <select name="select" id="select" onchange="changeTEMP()">
+                    <option value = "C" class ="C" >C</option>
+                    <option value = "F" class ="F">F</option>
+                </select> 
             </div>
 
 
-        </div>
 
+        <div class = "everything">
+
+            <!-- body -->
+            <div class="middle">
+
+                <div class = "row1">
+                    <h3>Today</h3>
+                    <img src = "assets/assets/some_rain.png"  alt="rain">
+                    <p>some rain</p>
+                    <div class = "numbers">
+                        <p class = "first-p"><span class ="high1">24</span></p>
+                        <p class = "sec-p"><span class ="low1">18</span></p>
+                    </div>
+                </div>
+
+                <div class = "row2">
+                    <h3>Tomorrow</h3>
+                    <img src = "assets/assets/some_sun.png"  alt="sun">
+                    <p>some sun</p>
+                    <div class = "numbers">
+                        <p class = "first-p"><span class ="high2">27</span></p>
+                        <p class = "sec-p"><span class ="low2">19</span></p>
+                    </div>
+                </div>
+
+
+                <div class = "row3">
+                    <h3>Friday</h3>
+                    <img src = "assets/assets/some_clouds.png"  alt="clouds">
+                    <p>some clouds</p>
+                    <div class = "numbers">
+                        <p class = "first-p"><span class ="high3">21</span></p>
+                        <p class = "sec-p"><span class ="low3">16</span></p>
+                    </div>
+                </div>
+
+
+                <div class = "row4">
+                    <h3>Saturday</h3>
+                    <img src = "assets/assets/some_sun.png"  alt="sun">
+                    <p>some sun</p>
+                    <div class = "numbers">
+                        <p class = "first-p"><span class ="high4">26</span></p>
+                        <p class = "sec-p"><span class ="low4">21</span></p>
+                    </div>
+                </div>
+    
+            </div>
+
+
+            <div class = "pop-up">
+                <img src="assets/assets/cookie.png" alt ="cookie">
+                <div>
+                    <h4>Stop! Cookie Time</h4>
+                    <p>We use cookies (sadly not the edible ones) to personalize content and ads,
+                    to provide social media features, and to analyse our traffic. <a href="#">See More</a>
+                </p>
+                </div>
+                <button onclick="hide(this)">I accept</button>
+            </div>
+        
+        </div>
 
         <script src="script.js"></script>
 </body>

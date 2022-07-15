@@ -1,0 +1,27 @@
+class BankAccount:
+    def __init__(self, int_rate, balance): 
+        self.int_rate = int_rate
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if (self.balance >= amount):
+            self.balance -=amount
+        else:
+            print("Insufficient funds: Charging a $5 fee")
+
+    def display_account_info(self):
+        print("Balance: $",self.balance)
+
+    def yield_interest(self):
+        if (self.balance>0):
+            self.balance*=self.int_rate
+    
+
+
+adrien_bank = BankAccount(0.9,300)
+adrien_bank.withdraw(10)
+adrien_bank.deposit(100)
+adrien_bank.display_account_info()

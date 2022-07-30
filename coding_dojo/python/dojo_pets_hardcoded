@@ -24,14 +24,14 @@ class Pet:
 
 
 
-class Ninja(Pet):
+class Ninja():
 
-    def __init__(self, first_name , last_name , treats , pet_food):
+    def __init__(self, first_name , last_name , treats , pet_food, pet):
         self.first_name = first_name
         self.last_name = last_name
         self.treats = treats
         self.pet_food = pet_food
-        self.pet = Pet("doggy", "Dog", "jump")
+        self.pet = pet
 
 
     def walk(self):
@@ -43,6 +43,10 @@ class Ninja(Pet):
     def bathe(self):
         self.pet.noise()
 
+
+
+
+pet1 = Pet("doggy", "Dog", "jump")
 adrien = Ninja("Adrien", "Peep", 10, 5)
 
 

@@ -1,0 +1,48 @@
+
+class Product:		
+
+    # name=""
+    # price=0
+    # category=""
+    var1=0
+
+    def __init__(self, name, price, category):
+        self.name = name
+        self.price = price
+        self.category = category
+        
+
+    def update_price(self, cls, percent_change, is_increased):
+        if (is_increased):
+            self.price = self.price* (1+percent_change)
+        else:
+            self.price = self.price* (1-percent_change)
+            print(self.var1) 
+    
+    def print_info(self):
+        print (self.name," ",self.price," ",self.category)
+
+first_product=Product("thing",15.00,"category1")
+first_product.update_price(0.10, True)
+# first_product
+
+
+
+class Store:		
+    # name = ""
+    # products = []
+
+    def __init__(self, name, products):
+        self.name = name
+        self.products = products
+
+    def add_product(self, new_product):
+        self.products.append(new_product)
+
+    def sell_product(self, id): 
+        self.products.pop(id)
+
+    # def inflation(self, percent_increase) - increases the price of each product by the percent_increase given (use the method you wrote in the Product class!)
+
+    # def set_clearance(self, category, percent_discount) - updates all the products matching the given category by reducing the price by the percent_discount given (use the method you wrote in the Product class!)
+

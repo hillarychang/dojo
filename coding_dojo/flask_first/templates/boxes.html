@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .outside{
+            display: flex;
+            align-items: baseline;
+        }
+
+        .boxes {
+            width: 320px;
+            height:320px;
+            padding: 10px;
+            background-color: {{color}} ;
+            border: 1px solid black;
+            margin: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class = "outside">
+        {% for i in range (0,x) %}
+            <div class = "boxes">Box</div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -7,15 +7,31 @@
     <title>Document</title>
 
     <style>
+/* 
+        *{
+            box-sizing: border-box;
+        } */
+
+        /* body{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+        } */
+
+        /* tr{
+            display: block;
+            /* flex-direction: column;
+        } */
 
         .outside{
-            display: flex;
-            align-items: baseline;
+            /* display: flex; */
+            /* align-items: baseline; */
         }
 
         .box1 {
-            width: 50px;
-            height:50px;
+            width: 5px;
+            height:5px;
             padding: 10px;
             background-color: red ;
             border: 1px solid black;
@@ -36,9 +52,23 @@
 
 <body>
     <div class = "outside">
-        {% for i in range (0,x) %}
-            <div class = "box1">Box</div>
-        {% endfor %}
+
+        <table>
+            <tbody>
+                {% for i in range (0,x) %}
+                    <tr>
+                        {% for u in range (0,y) %}
+                            {% if (u + i) % 2 == 0 %}
+                                <td class = "box1">Box</td>
+                            {% else %}
+                                <td class = "box2">Box</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>    
+                {% endfor %}                
+            </tbody>
+        </table>
+
     </div>
 </body>
 

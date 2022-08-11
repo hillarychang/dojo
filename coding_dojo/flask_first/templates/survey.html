@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+
+
+        .not-submitted {
+            width: 200px;
+            height:200px;
+            padding: 10px;
+            background-color: red ;
+            border: 1px solid black;
+            margin: 0px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <h1>Dojo Survey</h1>
+
+    <form action="/info" method="post" class = "not-submitted">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="default"><br>
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location" value="default"><br>
+        <label for="language">Favorite Language:</label><br>
+        <input type="text" id="language" name="language" value="default"><br>
+        <label for="comments">Comments:</label><br>
+        <input type="text" id="comments" name="comments" value="default"><br>
+        <input type='submit' value='create user'><br>
+    </form>  
+
+
+</body>
+</html>
+

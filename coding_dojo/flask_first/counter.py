@@ -26,16 +26,6 @@ def reset():
 
 
 
-# @app.route('/users', methods=['POST']) #post: process form, send data
-# def create_counter():
-#     print("Got Post Info")
-#     # Here we add a property to session to store the name 
-#     session['username'] = request.form['name']
-#     print("session ",session)
-#     print("request ",request.form['name'])
-#     return redirect('/show') #use for post request
-
-
 if __name__=="__main__":
     app.run(debug=True)
 

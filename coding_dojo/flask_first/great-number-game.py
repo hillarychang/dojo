@@ -13,24 +13,11 @@ def show():
         #template: use html in flask
 
 
-# @app.route('/result') #post: process form, send data
-# def result():
-#     if "user_guess" in session:
-#         if session['user_guess'] < true_num:
-#             session['user_guess']  = "Too low!"
-#         elif session['user_guess'] > true_num:
-#             session["user_guess"] = "Too high!"
-#         elif session['user_guess'] == true_num:
-#             session["user_guess"] = "Correct"
-#     return redirect('/')  #render show.html template
-
 
 @app.route('/guess', methods=['POST']) #post: process form, send data
 def process_guess():
     # Here we add a property to session to store the name 
     session['user_guess'] = int(request.form['guess'])
-    # print("session ",session)
-    # print("guess ",request.form['guess'])
     return redirect('/') #use for post request
 
 

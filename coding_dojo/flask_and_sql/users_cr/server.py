@@ -10,7 +10,7 @@ def index():
     # call the get all classmethod to get all users
     users = User.get_all()
     print(users)
-    return render_template("index.html", all_users = users) #watermelon = "watermelon"
+    return render_template("index.html", all_users = users) #ex. watermelon = "watermelon"
 
 
 @app.route('/create_user', methods=["POST"])

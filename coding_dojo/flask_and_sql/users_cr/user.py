@@ -4,7 +4,6 @@ from mysqlconnection import connectToMySQL
 class User:
     db='friends'
 
-
     def __init__( self , data ):
         self.id = data['id']
         self.first_name = data['first_name']

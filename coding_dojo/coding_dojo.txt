@@ -1,4 +1,0 @@
-INSERT INTO names (name, created_at, updated_at)
-VALUES ("Hillary", '2004-11-30', '2004-11-30');
-
-SELECT * FROM names;

@@ -1,18 +1,18 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import render_template, redirect, request, session
 
-# import the class from friend.py
-from user import User
-app = Flask(__name__)
+from flask_app import app
+
+from flask_app.models.user import User
+
 
 
 @app.route("/")
 def index():
-    return render_template("index.html") #ex. watermelon = "watermelon"
-
-@app.route("/show_users")
-def show_users():
+    # call the get all classmethod to get all users
     users = User.get_all()
-    return render_template("index-result.html", all_users = users)
+    print(users)
+    return render_template("index.html", all_users = users) #ex. watermelon = "watermelon"
+
 
 @app.route('/create_user', methods=["POST"])
 def create_user():
@@ -29,9 +29,4 @@ def create_user():
     return redirect('/')
 
 
-
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
 

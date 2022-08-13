@@ -1,21 +1,21 @@
 # import the function that will return an instance of a connection
 from mysqlconnection import connectToMySQL
-# model the class after the friend table from our database
+# model the class after the user table from our database
 class User:
-    db='friends'
+    db='users'
 
     def __init__( self , data ):
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.email = data['email']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     
     # Now we use class methods to query our database
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM users;"
-        # make sure to call the connectToMySQL function with the schema you are targeting.
+        query = "SELECT * FROM user;" #user table
         results = connectToMySQL(cls.db).query_db(query)
         # Create an empty list to append our instances of users
         users = []
@@ -26,9 +26,10 @@ class User:
             
 
     # ... other class methods
-    # class method to save our friend to the database
+    # class method to save our user to the database
     @classmethod
-    def save(cls, data ):
-        query = "INSERT INTO users ( first_name , last_name  , created_at, updated_at ) VALUES ( %(fname)s , %(lname)s ,  NOW() , NOW() );"
+    def save(cls, data ): #user table
+        query = "INSERT INTO user ( first_name , last_name  , email, created_at, updated_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
         # data is a dictionary that will be passed into the save method from server.py
         return connectToMySQL(cls.db).query_db( query, data )
+

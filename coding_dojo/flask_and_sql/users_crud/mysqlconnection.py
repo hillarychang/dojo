@@ -4,8 +4,8 @@ import pymysql.cursors
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-db_password = os.getenv('password')
+# load_dotenv()
+# db_password = os.getenv('password')
 
 # import os
 # # Set environment variables
@@ -18,7 +18,7 @@ class MySQLConnection:
     # change the user and password as needed
         connection = pymysql.connect(host = 'localhost',
                                     user = 'root', 
-                                    password = db_password, 
+                                    password = 'root', 
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,

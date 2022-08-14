@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>{{author.name}}'s Favorites</h1>
+
+    
+    {% for one_book in author.on_books %}
+
+        <p> Title: {{one_book.title}}</p>
+        <p># of pages: {{one_book.num_of_pages}}</p>
+        <hr>
+    
+    {% endfor %}
+
+
+    <h1>Add Author's Favorites</h1>
+    <form action="/add_favorite_book/{{author.id}}" method="POST"> 
+        <select name="books_id"> 
+            <!-- books_id in request.form -->
+            {% for book in all_books %}
+                {% if book.id not in author.on_books | map(attribute="id") %}
+                <option value={{book.id}}>{{book.title}}</option>  
+                {% endif %}
+            {% endfor %}          
+        </select>
+        <!-- <input type = "hidden"> -->
+        <input type="submit" value="Create">
+    </form> 
+
+    <a href = "/">Home</a>
+
+
+</body>

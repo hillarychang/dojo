@@ -4,17 +4,32 @@ from flask_app.models import authors
 
 
 class Book:
+
+    db='books' #dojo database (in mySQL workbench)
+
     def __init__( self , data ):
         self.id = data['id']
-        self.name = data['name']
-        self.bun = data['bun']
-        self.meat = data['meat']
-        self.calories = data['calories']
+        self.title = data['title']
+        self.num_of_pages = data['num_of_pages']
         self.created_at = data['created_at']
-        self.updated_at = data['updated']
+        self.updated_at = data['updated_at']
 
         # We now create a list so that later we can add in all the author objects that relate to a book.
         self.authors = []
+
+
+    @classmethod
+    def add_to_author_favorites( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
+        query = "INSERT INTO favorites ( author_id , book_id ) VALUES (%(authors_id)s, %(books_id)s);"
+        return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
+
+
+    @classmethod
+    def save( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
+        query = "INSERT INTO books ( title , num_of_pages, created_at , updated_at ) VALUES (%(title)s, %(num_of_pages)s, NOW(),NOW());"
+        return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
+
+
 
     # This method will retrieve the book with all the authors that are associated with the book.
     @classmethod
@@ -27,14 +42,24 @@ class Book:
             
             # Now we parse the author data to make instances of authors and add them into our list.
             author_data = {
-                "id" : row_from_db["toppings.id"],
-                "topping_name" : row_from_db["topping_name"],
-                "created_at" : row_from_db["toppings.created_at"],
-                "updated_at" : row_from_db["toppings.updated_at"]
+                "id" : row_from_db["authors.id"],
+                "name" : row_from_db["name"],
+                "created_at" : row_from_db["authors.created_at"],
+                "updated_at" : row_from_db["authors.updated_at"]
             }
             book.authors.append(authors.Author( author_data ) )
         return book
 
+# Now we use class methods to query our database
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM books;"
+        results = connectToMySQL(cls.db).query_db(query)
+        books = []      # Create an empty list to append our instances of users
+        for book in results: # Iterate over the db results and create instances of users with cls.
+            books.append( cls(book) )
+        return books #returns list of class objects (list of dictionaries)
+            
 
 
 
@@ -50,8 +75,3 @@ class Book:
 #         self.age = db_data['age']
 #         self.created_at = db_data['created_at']
 #         self.updated_at = db_data['updated_at']
-
-#     @classmethod
-#     def save( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
-#         query = "INSERT INTO ninjas ( first_name , last_name, age, dojos_id, created_at , updated_at ) VALUES (%(fname)s, %(lname)s, %(age)s,  %(dojos_id)s,NOW(),NOW());"
-#         return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <h1>Cookie Orders</h1>
+    <h2>All Orders:</h2>
+
+    {% for one_order in all_orders %}
+        <p>Customer Name: {{one_order.name}}</p>
+        <p>Cookie Type: {{one_order.type}}</p>
+        <p>Number of Boxes: {{one_order.number_of_boxes}}</p>
+        <hr>
+        <p>Actions<a href = "/edit/{{one_order.id}}">Edit</a></p>
+    
+    {% endfor %}
+
+    <a href = "/cookies/new">+ New Order</a>
+
+</body>
+</html>

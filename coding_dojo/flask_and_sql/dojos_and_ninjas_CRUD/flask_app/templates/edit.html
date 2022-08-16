@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Update Ninja</h1>
+    <form action="/update/{{ninja.id}}" method="POST">  <!-- connects to route to update user -->
+        
+        <!-- ninja passed from server.py -->
+        <label for="fname">First Name:</label><br>
+        <input type="text" name="fname" value = {{ninja.first_name}}> <br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" name="lname" value = {{ninja.last_name}}><br>
+        <label for="age" >Age:</label><br>
+        <input type="text" name="age" value = {{ninja.age}}><br>
+        <input type="submit" value="Update Ninja">
+    </form> 
+
+    <a href = "/show_users">Home</a>
+    <a href = "/show/{{ninja.id}}">Show User</a>
+    
+
+</body>
+</html>

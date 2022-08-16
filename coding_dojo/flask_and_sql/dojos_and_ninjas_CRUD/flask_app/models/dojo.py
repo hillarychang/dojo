@@ -35,10 +35,11 @@ class Dojo: # model the class after the user table from our database
                 "first_name" : row_from_db["first_name"],
                 "last_name" : row_from_db["last_name"],
                 "age" : row_from_db["age"],
+                "dojos_id": row_from_db['dojos_id'],
                 "created_at" : row_from_db["ninjas.created_at"],
                 "updated_at" : row_from_db["ninjas.updated_at"]
             }
-            dojo.ninjas.append( ninja.Ninja( ninja_data ) )
+            dojo.ninjas.append( ninja.Ninja( ninja_data ) )  #looping through rows in table and constructing ninja objects
         return dojo     #returns an object with a list of ninjas inside 
 
 
@@ -53,6 +54,28 @@ class Dojo: # model the class after the user table from our database
             dojos.append( cls(dojo) )
         return dojos #returns list of class objects (list of dictionaries)
             
+
+
+
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM dojos WHERE id = %(id)s ;" #%(id)s is the key of the dictionary data and returns id
+        results = connectToMySQL(cls.db).query_db(query, data) #query_db returns list of objects
+        # print ("here",results)
+        return cls(results[0])   
+
+
+        # class method to remove one user from the database
+    @classmethod
+    def delete(cls, data ):
+        query = "DELETE FROM dojos WHERE id=%(id)s;"
+        return connectToMySQL(cls.db).query_db( query, data )
+
+    # class method to edit one user in the database
+    @classmethod
+    def update(cls, data ):
+        query = "UPDATE dojos SET first_name = %(fname)s , last_name = %(lname)s  , age = %(age)s , updated_at=NOW() WHERE id=%(id)s"
+        return connectToMySQL(cls.db).query_db( query, data )
 
 #     @classmethod
 #     def get_one(cls, data):

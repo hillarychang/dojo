@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 from flask_app.models.user import User
+from flask_app.models.post import Post
 
 app.secret_key = "shhh"
 
@@ -26,7 +27,6 @@ def create_user():
     }
 
     user_id = User.save(data)
-    print("USERID", user_id)
     # store user id into session
     session['user_id'] = user_id
     return redirect("/show_logged_in")
@@ -78,46 +78,5 @@ def log_out():
     session.clear()
     session["counter"] = 1
     return redirect('/')
-
-
-
-# @app.route('/login', methods=["POST"])
-# def login():
-#     # First we make a data dictionary from our request.form coming from our template.
-#     # The keys in data need to line up exactly with the variables in our query string.
-#     if not User.validate_login(request.form): #request.form  (check user.py)
-#         return redirect('/')
-
-#     data = {
-#         "email" : request.form["email"],
-#         "password" : request.form["password"]
-#     }
-#     # We pass the data dictionary into the save method from the User class.
-#     id = User.save(data)
-#     return redirect('/show_logged_in') 
-
-
-# @app.route('/create_user', methods=["POST"])
-# def create_user():
-#     # First we make a data dictionary from our request.form coming from our template.
-#     # The keys in data need to line up exactly with the variables in our query string.
-#     if not User.validate_user(request.form): #request.form  (check user.py)
-#         return redirect('/')
-
-#     data = {
-#         "fname": request.form["fname"],
-#         "lname" : request.form["lname"],
-#         "email" : request.form["email"],
-#         "password" : request.form["password"],
-#         "confirm" : request.form["confirm"]
-#     }
-#     # We pass the data dictionary into the save method from the User class.
-#     id = User.save(data)
-#     return redirect('/show_logged_in') 
-
-
-
-
-
 
 

@@ -8,8 +8,38 @@
 </head>
 <body>
 
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Coding Dojo Wall</h1>
 
     <h1>Welcome {{user.first_name}}</h1>
+
+    <h3>What's on your mind? Create a project</h1>
+
+    <form action="/create_post" method="POST">
+        <textarea name="message" rows="10" cols="30">
+        </textarea>
+        <input type="submit" value="Publish">
+    </form> 
+
+
+    <h1>All Community Posts</h1>
+    
+    {% for one_order in all_orders %}
+        <p>Customer Name: {{one_order.name}}</p>
+        <p>Cookie Type: {{one_order.type}}</p>
+        <p>Number of Boxes: {{one_order.number_of_boxes}}</p>
+        <hr>
+        <p>Actions<a href = "/edit/{{one_order.id}}">Edit</a></p>
+    
+    {% endfor %}
+
 
     <!-- {% for one_user in all_users %}
         <p>First Name: {{one_user.first_name}}</p>

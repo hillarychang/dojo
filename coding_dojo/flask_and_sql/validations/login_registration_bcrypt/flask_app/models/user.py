@@ -1,7 +1,6 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import post
 
 from flask_app import app
 from flask_bcrypt import Bcrypt   
@@ -12,7 +11,7 @@ import re	# the regex module
 
 class User: # model the class after the user table from our database
     
-    db='dojo_wall' #login database (in mySQL workbench)
+    db='login' #login database (in mySQL workbench)
 
     def __init__( self , data ):
         self.id = data['id']
@@ -23,7 +22,7 @@ class User: # model the class after the user table from our database
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     
-        self.posts=[]
+
 
 
 # REGISTRATION
@@ -32,6 +31,7 @@ class User: # model the class after the user table from our database
         query = "INSERT INTO user ( first_name , last_name  , email, password, created_at, updated_at ) VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(password)s ,NOW() , NOW() );"
         # data is a dictionary that will be passed into the save method from server.py
         result = connectToMySQL(cls.db).query_db( query, data )  # returns an ID because of insert statement
+        print("RESULTS",result)
         return result
     
 
@@ -44,6 +44,14 @@ class User: # model the class after the user table from our database
         if len(result) < 1:
             return False
         return cls(result[0])
+
+    # @classmethod
+    # def save_login(cls,data):
+    #     query = "INSERT INTO user (email, password) VALUES (%(email)s, %(password)s);"
+    #     # return connectToMySQL(cls.db).query_db(query, data)
+    #     return connectToMySQL(cls.db).mysql.query_db(query, data)
+
+
 
     @staticmethod
     def validate_user(user):
@@ -102,6 +110,10 @@ class User: # model the class after the user table from our database
         # print ("here",results)
         return cls(results[0])   
 
+
+    # # OTHER class methods
+    # # class method to save our user to the database
+
     # class method to remove one user from the database
     @classmethod
     def delete(cls, data ):
@@ -113,20 +125,3 @@ class User: # model the class after the user table from our database
     def update(cls, data ):
         query = "UPDATE user SET first_name = %(fname)s , last_name = %(lname)s  , email = %(email)s , updated_at=NOW() WHERE id=%(id)s"
         return connectToMySQL(cls.db).query_db( query, data )
-
-    @classmethod
-    def get_user_with_posts( cls , data ):
-        query = "SELECT * FROM user LEFT JOIN posts ON posts.user_id = user.id WHERE user.id = %(id)s;"
-        results = connectToMySQL(cls.db).query_db( query , data )
-        # results will be a list of topping objects with the ninja attached to each row. 
-        user = cls( results[0] )
-        for row_from_db in results:
-            # Now we parse the ninja data to make instances of ninjas and add them into our list.
-            post_data = {
-                "id" : row_from_db["posts.id"],  #ninjas.__ because id overlaps with id in dojo
-                "first_name" : row_from_db["content"],
-                "created_at" : row_from_db["posts.created_at"],
-                "updated_at" : row_from_db["posts.updated_at"]
-            }
-            user.posts.append( post.Post( post_data ) )
-        return user     #returns an object with a list of ninjas inside 

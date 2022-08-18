@@ -27,9 +27,11 @@ def create_user():
     }
 
     user_id = User.save(data)
+
+    print("ID",user_id)
     # store user id into session
     session['user_id'] = user_id
-    return redirect("/show_logged_in")
+    return redirect("/post")
 
 
 
@@ -55,7 +57,7 @@ def login():
 
     session['user_id'] = user_in_db.id #create session with user_in_db.id 
 
-    return redirect("/show_logged_in")
+    return redirect("/post")
 
 
 
@@ -63,13 +65,12 @@ def login():
 def index():
     return render_template("index.html") 
 
-#route to display page
-@app.route("/show_logged_in") 
-def show_logged_in():
-    # data = {'id':session['user_id']}
-    print("HERE",session['user_id'])
-    users = User.get_one(session['user_id'])
-    return render_template("result.html", user = users)
+# #route to display page
+# @app.route("/show_logged_in") 
+# def show_logged_in():
+#     # data = {'id':session['user_id']}
+#     users = User.get_one(session['user_id'])
+#     return render_template("result.html", user = users)
 
 
 

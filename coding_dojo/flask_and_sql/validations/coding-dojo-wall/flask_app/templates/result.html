@@ -18,37 +18,39 @@
 
     <h1>Coding Dojo Wall</h1>
 
-    <h1>Welcome {{user.first_name}}</h1>
+    <h1>Welcome {{users.first_name}}</h1>
+    <!-- user is from controller_users.py -->
+    <a href = "/log_out">Logout</a>
 
     <h3>What's on your mind? Create a project</h1>
 
-    <form action="/create_post" method="POST">
+    <form action="/create_post" method="post">
         <textarea name="message" rows="10" cols="30">
         </textarea>
-        <input type="submit" value="Publish">
+        <button type="submit">Publish</button>
     </form> 
 
 
     <h1>All Community Posts</h1>
     
-    {% for one_order in all_orders %}
-        <p>Customer Name: {{one_order.name}}</p>
-        <p>Cookie Type: {{one_order.type}}</p>
-        <p>Number of Boxes: {{one_order.number_of_boxes}}</p>
+    {% for one_post in all_posts %}
+        <p>{{users.first_name}}</p> 
+        <!-- wants user's name by getting User.name from one_post.users_id -->
+        <p>{{one_post.created_at}}</p>
+        <p>{{one_post.content}}</p>
         <hr>
-        <p>Actions<a href = "/edit/{{one_order.id}}">Edit</a></p>
-    
+
+
+        {% if users.id == one_post.user_id %}
+            <a href = "/delete/{{one_post.id}}">Delete</a>        
+        {% endif %}
+
+
+
+        <!-- <a href = "/log_out">Delete</a> -->
     {% endfor %}
 
 
-    <!-- {% for one_user in all_users %}
-        <p>First Name: {{one_user.first_name}}</p>
-        <p>Last Name: {{one_user.last_name}}</p>
-        <p>Email: {{one_user.email}}</p>
-        <hr> -->
-    <!-- {% endfor %} -->
-
-    <a href = "/log_out">Logout</a>
 
 </body>
 </html>

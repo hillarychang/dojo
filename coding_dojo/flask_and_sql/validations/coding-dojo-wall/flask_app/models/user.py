@@ -40,15 +40,21 @@ class User: # model the class after the user table from our database
     def get_by_email(cls,data):
         query = "SELECT * FROM user WHERE email = %(email)s;"
         result = connectToMySQL(cls.db).query_db(query,data)
+            #result is a list of dictionaries
         # Didn't find a matching user
         if len(result) < 1:
             return False
-        return cls(result[0])
+        return cls(result[0]) 
 
     @staticmethod
     def validate_user(user):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
         is_valid = True # we assume this is true
+
+        currentUser = User.get_by_email({'email':user['email']})
+        if currentUser: #falsy/truthy -> get_by_email returns either empty tuple or a tuple if it already exists
+            flash("User already exists")
+            is_valid = False
         if len(user['fname']) < 1:
             flash("First name is required.")
             is_valid = False
@@ -62,6 +68,12 @@ class User: # model the class after the user table from our database
         if not EMAIL_REGEX.match(user['email']): 
             flash("Invalid email address!")
             is_valid = False
+        # users = User.get_all()
+        # for x in users:    
+        #     if user['email'] == x['email']:
+        #         flash("User already exists")
+        #         is_valid = False
+
         return is_valid
 
 
@@ -91,6 +103,7 @@ class User: # model the class after the user table from our database
         users = []      # Create an empty list to append our instances of users
         for user in results: # Iterate over the db results and create instances of users with cls.
             users.append( cls(user) )
+        print("USERS HERE NOW", users)
         return users #returns list of class objects (list of dictionaries)
             
 
@@ -99,7 +112,7 @@ class User: # model the class after the user table from our database
         data = {'id': id}
         query = "SELECT * FROM user WHERE id = %(id)s ;" #%(id)s is the key of the dictionary data and returns id
         results = connectToMySQL(cls.db).query_db(query, data) #query_db returns list of objects
-        # print ("here",results)
+        print ("here",results)
         return cls(results[0])   
 
     # class method to remove one user from the database
@@ -124,9 +137,11 @@ class User: # model the class after the user table from our database
             # Now we parse the ninja data to make instances of ninjas and add them into our list.
             post_data = {
                 "id" : row_from_db["posts.id"],  #ninjas.__ because id overlaps with id in dojo
-                "first_name" : row_from_db["content"],
+                "content" : row_from_db["content"],
+                "user_id" : row_from_db['user_id'],
                 "created_at" : row_from_db["posts.created_at"],
                 "updated_at" : row_from_db["posts.updated_at"]
+                
             }
             user.posts.append( post.Post( post_data ) )
-        return user     #returns an object with a list of ninjas inside 
+        return user     #returns an object with a list of posts inside 

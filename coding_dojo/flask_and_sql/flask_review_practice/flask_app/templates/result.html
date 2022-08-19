@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Coding Dojo Wall</h1>
+
+    <h1>Welcome {{users.first_name}}</h1>
+    <!-- user is from controller_users.py -->
+    <a href = "/log_out">Logout</a>
+
+    <h3>What's on your mind? Create a project</h1>
+
+    <form action="/create_post" method="post">
+        <textarea name="message" rows="10" cols="30">
+        </textarea>
+        <button type="submit">Publish</button>
+    </form> 
+
+
+    <h1>All Community Posts</h1>
+    
+    {% for one_post in all_posts %}
+        <p>{{users.first_name}}</p> 
+        <!-- wants user's name by getting User.name from one_post.users_id -->
+        <p>{{one_post.created_at}}</p>
+        <p>{{one_post.content}}</p>
+        <hr>
+
+
+        {% if users.id == one_post.user_id %}
+            <a href = "/delete/{{one_post.id}}">Delete</a>        
+        {% endif %}
+
+
+
+        <!-- <a href = "/log_out">Delete</a> -->
+    {% endfor %}
+
+
+
+</body>
+</html>

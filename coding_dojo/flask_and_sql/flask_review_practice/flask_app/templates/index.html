@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* 
+                *{
+                    box-sizing: border-box;
+                } */
+        
+                /* body{
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    align-items: center;
+                } */
+        
+                /* tr{
+                    display: block;
+                    /* flex-direction: column;
+                } */
+        
+                .outside{
+                    /* display: flex; */
+                    /* align-items: baseline; */
+                }
+        
+                .box1 {
+                    width: 5px;
+                    height:5px;
+                    padding: 10px;
+                    background-color: red ;
+                    border: 1px solid black;
+                    margin: 0px;
+                }
+        
+                .box2 {
+                    width: 5px;
+                    height:5px;
+                    padding: 10px;
+                    background-color: black ;
+                    border: 1px solid black;
+                    margin: 0px;
+                }
+            </style>
+
+</head>
+<body>
+
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Register Share</h1>
+    <h1>Register</h1>
+    <form action="/create_user" method="POST">
+        <label for="fname">First Name:</label><br>
+        <input type="text" name="fname"> <br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" name="lname"><br>
+        <label for="email" >Email:</label><br>
+        <input type="text" name="email"><br>
+        <label for="password" >Password:</label><br>
+        <input type="text" name="password"><br>
+        <label for="confirm" >Confirm Password:</label><br>
+        <input type="text" name="confirm"><br>
+        <input type="submit" value="Register">
+    </form> 
+
+
+
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+        <label for="email" >Email:</label><br>
+        <input type="text" name="email"><br>
+        <label for="password" >Password:</label><br>
+        <input type="text" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+
+</body>
+</html>

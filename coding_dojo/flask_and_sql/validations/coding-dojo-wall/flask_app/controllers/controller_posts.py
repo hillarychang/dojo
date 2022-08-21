@@ -16,6 +16,7 @@ app.secret_key = "shhh"
 def post():
     
     posts = Post.get_all()
+    # all_user = User.get_all()
     data = {"id":session['user_id']} # need user's id
     user = User.get_user_with_posts(data) #returns a user with a list of posts
 

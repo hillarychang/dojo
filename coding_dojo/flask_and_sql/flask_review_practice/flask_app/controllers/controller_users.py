@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 from flask_app.models.user import User
-from flask_app.models.post import Post
+from flask_app.models.recipe import Recipe
 
 app.secret_key = "shhh"
 
@@ -31,7 +31,7 @@ def create_user():
     print("ID",user_id)
     # store user id into session
     session['user_id'] = user_id
-    return redirect("/post")
+    return redirect("/showUser")
 
 
 
@@ -57,7 +57,18 @@ def login():
 
     session['user_id'] = user_in_db.id #create session with user_in_db.id 
 
-    return redirect("/post")
+    return redirect("/showUser")
+
+
+@app.route("/showUser") #runs starting form
+def showUser():
+    
+    recipes = Recipe.get_all()
+    data = {"id":session['user_id']} # need user's id
+    user = User.get_user_with_recipes(data) #returns a user with a list of recipes
+    return render_template("result.html", all_recipes = recipes, users = user) 
+
+
 
 
 
@@ -77,7 +88,7 @@ def index():
 @app.route("/log_out") 
 def log_out():
     session.clear()
-    session["counter"] = 1
+    # session["counter"] = 1
     return redirect('/')
 
 

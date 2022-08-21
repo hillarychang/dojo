@@ -34,7 +34,7 @@
     <h1>All Community Posts</h1>
     
     {% for one_post in all_posts %}
-        <p>{{users.first_name}}</p> 
+        <p>{{one_post.user.first_name}}</p> 
         <!-- wants user's name by getting User.name from one_post.users_id -->
         <p>{{one_post.created_at}}</p>
         <p>{{one_post.content}}</p>

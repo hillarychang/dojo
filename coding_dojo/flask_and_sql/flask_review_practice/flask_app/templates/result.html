@@ -16,39 +16,43 @@
     {% endif %}
     {% endwith %}
 
-    <h1>Coding Dojo Wall</h1>
-
     <h1>Welcome {{users.first_name}}</h1>
     <!-- user is from controller_users.py -->
+    <a href = "/recipe">+ Create</a>
     <a href = "/log_out">Logout</a>
 
-    <h3>What's on your mind? Create a project</h1>
+    <h3>All posted recipes</h3>
 
-    <form action="/create_post" method="post">
-        <textarea name="message" rows="10" cols="30">
-        </textarea>
-        <button type="submit">Publish</button>
-    </form> 
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Under</th>
+            <th>Posted by</th>
+            <th>Actions</th>
+        </tr>
 
+        {% for one_recipe in all_recipes %}
+        <tr>
+            <td>{{one_recipe.name}}</td> 
+            <td>{{one_recipe.under}}</td> 
+            <!-- ^need if statements -->
+            <td>{{users.first_name}}</td>
+            <td>Actions: fill later
+            
+                {% if users.id == recipe.user_id %}
+                <a href = "/view-recipe/{{one_recipe.id}}">View Recipe</a>
+                <a href = "/edit/{{one_recipe.id}}">Edit</a>
+                <a href = "/delete/{{one_recipe.id}}">Delete</a>          
+        
+                {% endif %}
 
-    <h1>All Community Posts</h1>
-    
-    {% for one_post in all_posts %}
-        <p>{{users.first_name}}</p> 
-        <!-- wants user's name by getting User.name from one_post.users_id -->
-        <p>{{one_post.created_at}}</p>
-        <p>{{one_post.content}}</p>
-        <hr>
+            </td>
 
+            <hr>
+        </tr>    
+        {% endfor %}
+    </table>
 
-        {% if users.id == one_post.user_id %}
-            <a href = "/delete/{{one_post.id}}">Delete</a>        
-        {% endif %}
-
-
-
-        <!-- <a href = "/log_out">Delete</a> -->
-    {% endfor %}
 
 
 

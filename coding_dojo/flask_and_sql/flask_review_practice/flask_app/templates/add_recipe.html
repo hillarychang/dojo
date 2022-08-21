@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Add a New Recipe!</h1>
+
+    <a href = "/showUser">back to recipes</a>
+    <a href = "/log_out">Logout</a>
+
+    <form action="/create_recipe" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" name="name"> <br>        
+        <p>Description</p><br>
+        <textarea name="description" rows="10" cols="30">
+        </textarea><br>
+        <p>Instructions</p><br>
+        <textarea name="instructions" rows="10" cols="30">
+        </textarea><br>
+        <!-- not sure if im doing <textarea> correct?? -->
+
+
+        <label for="created_at">Date cooked/Made:</label>
+        <input type="date" id="created_at" name="created_at">
+
+        <p>Under 30 Minutes?</p>
+        <input type="radio" id="yes" name="under" value="yes">
+        <label for="under">Yes</label><br>
+        <input type="radio" id="no" name="under" value="no">
+        <label for="under">No</label><br>
+
+        <!-- <input type="submit" value="Login"> -->
+        <button type="submit">Submit</button>
+    </form> 
+
+
+
+</body>
+</html>

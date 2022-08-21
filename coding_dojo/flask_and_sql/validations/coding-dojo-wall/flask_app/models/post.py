@@ -2,6 +2,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
+from flask_app.models import user
 from flask_app import app
 from flask_bcrypt import Bcrypt   
 bcrypt = Bcrypt(app)     # we are creating an object called bcrypt, 
@@ -49,11 +50,26 @@ class Post: # model the class after the user table from our database
 # Now we use class methods to query our database
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM posts ORDER BY created_at DESC;"
+
+        #*changed this method
+        query = "SELECT * FROM posts LEFT JOIN user ON posts.user_id = user.id ORDER BY posts.created_at DESC;"
         results = connectToMySQL(cls.db).query_db(query)
         posts = []      # Create an empty list to append our instances of users
+        
         for post in results: # Iterate over the db results and create instances of users with cls.
-            posts.append( cls(post) )
+            one_post = cls(post)
+
+            user_data = {
+                "id":post["user.id"], 
+                "first_name":post["first_name"], 
+                "last_name":post["last_name"],
+                "email":post["email"],
+                "password":post["password"],
+                "created_at" :post['user.created_at'],
+                "updated_at": post['user.updated_at']
+            }
+            one_post.user = user.User(user_data)
+            posts.append( one_post)
         return posts #returns list of class objects (list of dictionaries)
             
 

@@ -25,8 +25,11 @@ def recipe():
 @app.route("/show/<int:id>") #runs show-one-user page
 def show_one(id):
     data = {'id':id}
+    user_data = {"id":session['user_id']} # need user's id
+    user = User.get_one(user_data)
+
     recipes = Recipe.get_one(data)
-    return render_template("view_recipe.html", one_recipe = recipes)
+    return render_template("view_recipe.html", one_recipe = recipes, users = user)
 
 
 
@@ -42,7 +45,9 @@ def update_recipe(id):
         "name": request.form["name"],
         "description" : request.form["description"],
         "instructions" : request.form["instructions"],
-        "under" : request.form["under"]
+        "under" : request.form["under"],
+        "created_at" : request.form["created_at"]
+
     }
 
     Recipe.update(data)

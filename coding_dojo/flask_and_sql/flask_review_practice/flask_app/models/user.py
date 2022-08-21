@@ -107,8 +107,8 @@ class User: # model the class after the user table from our database
             
 
     @classmethod
-    def get_one(cls, id):
-        data = {'id': id}
+    def get_one(cls, data):
+        # data = {'id': id}
         query = "SELECT * FROM user WHERE id = %(id)s ;" #%(id)s is the key of the dictionary data and returns id
         results = connectToMySQL(cls.db).query_db(query, data) #query_db returns list of objects
         print ("here",results)

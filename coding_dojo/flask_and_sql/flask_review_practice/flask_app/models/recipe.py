@@ -1,6 +1,8 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models import user
+
 
 from flask_app import app
 from flask_bcrypt import Bcrypt   
@@ -61,17 +63,49 @@ class Recipe: # model the class after the user table from our database
 # Now we use class methods to query our database
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM recipe;"
+
+        #*changed this method
+        query = "SELECT * FROM recipe LEFT JOIN user ON recipe.user_id = user.id;"
+        print("query",query)
+
         results = connectToMySQL(cls.db).query_db(query)
+        
         posts = []      # Create an empty list to append our instances of users
+        
+        print("RESULTS",results)
         for post in results: # Iterate over the db results and create instances of users with cls.
-            posts.append( cls(post) )
+            print ("HERE", post)
+            one_post = cls(post)
+
+
+            user_data = {
+                "id":post["user.id"], 
+                "first_name":post["first_name"], 
+                "last_name":post["last_name"],
+                "email":post["email"],
+                "password":post["password"],
+                "created_at" :post['user.created_at'],
+                "updated_at": post['user.updated_at']
+            }
+
+            one_post.user = user.User(user_data)
+            posts.append( one_post)
         return posts #returns list of class objects (list of dictionaries)
+
+# # Now we use class methods to query our database
+#     @classmethod
+#     def get_all(cls):
+#         query = "SELECT * FROM recipe;"
+#         results = connectToMySQL(cls.db).query_db(query)
+#         posts = []      # Create an empty list to append our instances of users
+#         for post in results: # Iterate over the db results and create instances of users with cls.
+#             posts.append( cls(post) )
+#         return posts #returns list of class objects (list of dictionaries)
             
 
     @classmethod
-    def get_one(cls, id):
-        data = {'id': id}
+    def get_one(cls, data):
+        # data = {'id': id}
         query = "SELECT * FROM recipe WHERE id = %(id)s ;" #%(id)s is the key of the dictionary data and returns id
         results = connectToMySQL(cls.db).query_db(query, data) #query_db returns list of objects
         # print ("here",results)
@@ -87,5 +121,5 @@ class Recipe: # model the class after the user table from our database
     # class method to edit one user in the database
     @classmethod
     def update(cls, data ):
-        query = "UPDATE recipe SET name , under, description, instructions, created_at = %(name)s , %(under)s, %(description)s, %(instructions)s, %(created_at)s, updated_at=NOW() WHERE id=%(id)s"
+        query = "UPDATE recipe SET name = %(name)s, under = %(under)s, description =  %(description)s, instructions = %(instructions)s, created_at =%(created_at)s, updated_at=NOW() WHERE id=%(id)s"
         return connectToMySQL(cls.db).query_db( query, data )

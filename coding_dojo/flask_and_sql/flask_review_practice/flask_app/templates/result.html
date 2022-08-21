@@ -34,13 +34,20 @@
         {% for one_recipe in all_recipes %}
         <tr>
             <td>{{one_recipe.name}}</td> 
-            <td>{{one_recipe.under}}</td> 
-            <!-- ^need if statements -->
-            <td>{{users.first_name}}</td>
-            <td>Actions: fill later
+
+
+            {% if one_recipe.under == 0 %}
+                <td>No</td> 
+            {% else %}
+                <td>Yes</td> 
+            {% endif %}
             
-                {% if users.id == recipe.user_id %}
-                <a href = "/view-recipe/{{one_recipe.id}}">View Recipe</a>
+            <!-- ^need if statements -->
+            <td>{{one_recipe.user.first_name}}</td>
+            <td>Actions: fill later
+                <a href = "/show/{{one_recipe.id}}">View Recipe</a>
+
+                {% if users.id == one_recipe.user_id %}
                 <a href = "/edit/{{one_recipe.id}}">Edit</a>
                 <a href = "/delete/{{one_recipe.id}}">Delete</a>          
         

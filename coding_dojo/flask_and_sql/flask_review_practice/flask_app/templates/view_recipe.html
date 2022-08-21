@@ -28,9 +28,15 @@
 
     <p>{{users.first_name}}</p> 
     <!-- wants user's name by getting User.name from one_post.users_id -->
-    <p>Description {{one_recipe.description}}</p>
-    <p>Under {{one_recipe.under}}</p>
-    <p>Instructions {{one_recipe.instructions}}</p>
+    <p>Description: {{one_recipe.description}}</p>
+
+    {% if one_recipe.under == 0 %}
+    <p>Under: Yes</p>
+    {% else %}
+    <p>Under: No</p>
+    {% endif %}
+
+    <p>Instructions: {{one_recipe.instructions}}</p>
     <p>Created at: {{one_recipe.created_at}}</p>
 
     <hr>

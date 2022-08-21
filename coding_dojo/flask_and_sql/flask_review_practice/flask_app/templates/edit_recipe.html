@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="/static/edit_recipe.css">
+
 </head>
 <body>
 
@@ -18,16 +21,18 @@
 
     <h1>Edit Recipe!</h1>
 
-    <a href = "/log_out">back to recipes</a>
+    <a href = "/showUser">back to recipes</a>
     <a href = "/log_out">Logout</a>
 
-    <form action="/update/{{user.id}}" method="post">
+    <form action="/update/{{recipe.user_id}}" method="post">
         <label for="name">Name:</label><br>
-        <input type="text" name="name"> <br>        
+        <input type="text" name="name"> <br> 
+        <p>Description</p><br>
         <textarea name="description" rows="10" cols="30">
-        Description</textarea>
+        </textarea>
+        <p>Instructions</p><br>
         <textarea name="instructions" rows="10" cols="30">
-        Instructions</textarea>
+        </textarea><br><br>
         <!-- not sure if im doing <textarea> correct?? -->
 
 
@@ -35,9 +40,9 @@
         <input type="date" id="created_at" name="created_at">
 
         <p>Under 30 Minutes?</p>
-        <input type="radio" id="yes" name="under" value="yes">
+        <input type="radio" id="yes" name="under" value="1">
         <label for="under">Yes</label><br>
-        <input type="radio" id="no" name="under" value="no">
+        <input type="radio" id="no" name="under" value="0">
         <label for="under">No</label><br>
 
         <!-- <input type="submit" value="Login"> -->

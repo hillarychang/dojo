@@ -36,18 +36,33 @@
     <hr>
 
 
-
-    
-    <!-- {% if users not in all_skeptics %} -->
-        <a href = "/skeptic/{{one_sighting.id}}">Believe It</a>
-    <!-- {% endif %} -->
+<!-- START EDITING -->
+    <!-- <a href = "/add_skeptic_sighting/{{one_sighting.id}}">Believe It</a> -->
     <p>Skeptics:</p><br>
+    <a href = "/create_skeptic/{{one_sighting.id}}">Believe It</a>
 
-    {% for one_skeptic in all_skeptics %}
-        <p>Skeptics: {{one_skeptic.user.first_name}} {{one_sighting.user.last_name}}</p>   
+    <!-- <form action="/create_skeptic" method="POST">
+        <input type="submit" value="Believe it">
+    </form>  -->
+
+<!-- find a way to dispalya all skeptics on page -->
+
+    <!-- user_id &  sighting_id-->
+
+    {% for one_sighting in all_sightings %}
+        <p>Skeptics: {{one_sighting.skeptic.first_name}} {{one_sighting.user.last_name}}</p>   
     {% endfor %}
 
-    <p>Reported by: {{other_user.first_name}}</p>
+    
+    <!-- {% for one_user in all_users %}
+        <p>Skeptics: {{one_user.first_name}}</p>   
+    {% endfor %} -->
+
+
+    <!-- {% for one_skeptic in all_skeptics %}
+        <p>Skeptics: {{one_skeptic.user.first_name}} {{one_sighting.user.last_name}}</p>   
+    {% endfor %} -->
+
 
 
 </body>

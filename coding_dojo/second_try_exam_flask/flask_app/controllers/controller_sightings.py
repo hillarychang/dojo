@@ -12,6 +12,9 @@ app.secret_key = "shhh"
 
 
 
+
+
+
 @app.route("/sighting") #runs add recipe form
 def sighting():
     
@@ -34,7 +37,14 @@ def show_one(id):
 
     another_user = User.get_one({'id':sightings.user_id})
 
+
+
+    # get_user_with_skeptic_sightings()
+
+
     return render_template("view_sighting.html", one_sighting = sightings, users = user, other_user = another_user)
+
+
 
 
 
@@ -68,15 +78,6 @@ def edit_sighting(id):
 
     return render_template("edit_sighting.html", sighting = sightings, users  = user)
 
-
-
-
-
-# @app.route('/skeptic/<int:id>')
-# def skeptic(id): #post id
-#     data = {'id':id}
-#     user = User.get_one({"id":session['user_id']})
-#     return redirect('/show/<int:id>') 
 
 
 

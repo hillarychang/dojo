@@ -32,7 +32,11 @@ def create_skeptic(id):
         User.get_one({"id":session['user_id']}).set_skeptic()
         print("ok this worked",User.get_one({"id":session['user_id']}).skeptic)
 
-        
+    #this method should remove the user as a skeptic
+    if (User.get_one({"id":session['user_id']}).skeptic == 1):
+        User.delete_user_skeptics(data)  
+
+
     #inset into skeptic
     return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
 

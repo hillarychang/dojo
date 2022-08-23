@@ -40,6 +40,10 @@ class User: # model the class after the user table from our database
         query = "INSERT INTO skeptic ( user_id , sighting_id ) VALUES (%(user_id)s, %(sighting_id)s);"
         return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
 
+    @classmethod
+    def delete_user_skeptics( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
+        query = "DELETE FROM skeptic WHERE (user_id = %(user_id)s AND sighting_id = %(sighting_id)s);"
+        return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
 
     # @classmethod
     # def get_user_with_skeptic_sightings( cls , data ):

@@ -24,16 +24,13 @@ class User: # model the class after the user table from our database
         self.updated_at = data['updated_at']
     
         self.sightings=[]
+        self.skeptic = 0
 
 
 
+    def set_skeptic(self):
+        self._skeptic = 1
 
-    # @classmethod
-    # def skeptic(cls, data ):
-    #     query = "INSERT INTO user ( first_name , last_name  , email, password, created_at, updated_at ) VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(password)s ,NOW() , NOW() );"
-    #     # data is a dictionary that will be passed into the save method from server.py
-    #     result = connectToMySQL(cls.db).query_db( query, data )  # returns an ID because of insert statement
-    #     return result
 
 
 
@@ -44,24 +41,24 @@ class User: # model the class after the user table from our database
         return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
 
 
-    @classmethod
-    def get_user_with_skeptic_sightings( cls , data ):
-        query = "SELECT * FROM user LEFT JOIN skeptic ON skeptic.user_id = user.id LEFT JOIN sighting ON skeptic.sighting_id = sighting.id WHERE user.id = %(id)s;"
-        results = connectToMySQL(cls.db).query_db( query , data )
-        # results will be a list of author objects with the book attached to each row. 
-        user = cls( results[0] )
-        for row_from_db in results:
-            # Now we parse the author data to make instances of authors and add them into our list.
-            sighting_data = {
-            "id" : row_from_db["sighting.id"],
-            "location" : row_from_db["location"],
-            "what_happened" : row_from_db["what_happened"],
-            "number" : row_from_db["number"],
-            "created_at" : row_from_db["sighting.created_at"],
-            "updated_at" : row_from_db["sighting.updated_at"]
-            }
-            user.sightings.append( sighting.Sighting( sighting_data ) )   #appends book instances to list of books in author  
-        return user #returns dictionary: one author with a list of books
+    # @classmethod
+    # def get_user_with_skeptic_sightings( cls , data ):
+    #     query = "SELECT * FROM user LEFT JOIN skeptic ON skeptic.user_id = user.id LEFT JOIN sighting ON skeptic.sighting_id = sighting.id WHERE user.id = %(id)s;"
+    #     results = connectToMySQL(cls.db).query_db( query , data )
+    #     # results will be a list of author objects with the book attached to each row. 
+    #     user = cls( results[0] )
+    #     for row_from_db in results:
+    #         # Now we parse the author data to make instances of authors and add them into our list.
+    #         sighting_data = {
+    #         "id" : row_from_db["sighting.id"],
+    #         "location" : row_from_db["location"],
+    #         "what_happened" : row_from_db["what_happened"],
+    #         "number" : row_from_db["number"],
+    #         "created_at" : row_from_db["sighting.created_at"],
+    #         "updated_at" : row_from_db["sighting.updated_at"]
+    #         }
+    #         user.sightings.append( sighting.Sighting( sighting_data ) )   #appends book instances to list of books in author  
+    #     return user #returns dictionary: one author with a list of books
 
 
 # def add_skeptic_user

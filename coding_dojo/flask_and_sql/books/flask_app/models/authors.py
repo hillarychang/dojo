@@ -26,16 +26,11 @@ class Author:
             #  This method will retrieve the specific author along with all the books associated with it.
 
 
+#same as add_to_author_favorites
     @classmethod
     def add_to_book_favorites( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
         query = "INSERT INTO favorites ( author_id , book_id ) VALUES (%(authors_id)s, %(books_id)s);"
         return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
-
-    # @classmethod
-    # def add_to_book_favorites( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
-    #     query = "INSERT INTO books ( title , num_of_pages, created_at , updated_at ) VALUES (%(title)s, %(num_of_pages)s, NOW(),NOW());"
-    #     return connectToMySQL(cls.db).query_db(query,data) #database name
-
 
 
     @classmethod
@@ -67,29 +62,4 @@ class Author:
             authors.append( cls(author) )
         return authors #returns list of class objects (list of dictionaries)
             
-
-
-# class Author: # model the class after the user table from our database
-
-#     @classmethod
-#     def get_dojo_with_ninjas( cls , data ):
-#         query = "SELECT * FROM dojos LEFT JOIN ninjas ON ninjas.dojos_id = dojos.id WHERE dojos.id = %(id)s;"
-#         results = connectToMySQL(cls.db).query_db( query , data )
-#         # results will be a list of topping objects with the ninja attached to each row. 
-#         dojo = cls( results[0] )
-#         for row_from_db in results:
-#             # Now we parse the ninja data to make instances of ninjas and add them into our list.
-#             ninja_data = {
-#                 "id" : row_from_db["ninjas.id"],  #ninjas.__ because id overlaps with id in dojo
-#                 "first_name" : row_from_db["first_name"],
-#                 "last_name" : row_from_db["last_name"],
-#                 "age" : row_from_db["age"],
-#                 "created_at" : row_from_db["ninjas.created_at"],
-#                 "updated_at" : row_from_db["ninjas.updated_at"]
-#             }
-#             dojo.ninjas.append( ninja.Ninja( ninja_data ) )
-#         return dojo     #returns an object with a list of ninjas inside 
-
-
-
 

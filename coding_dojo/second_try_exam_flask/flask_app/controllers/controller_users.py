@@ -11,6 +11,12 @@ from flask_app.models.sighting import Sighting
 app.secret_key = "shhh"
 
 
+# controller_authors:add_favorite_author -> show_book_authors
+# show_book_authors
+
+
+
+
 @app.route("/create_skeptic/<int:id>") #runs add recipe form
 def create_skeptic(id):
     data = {
@@ -18,8 +24,17 @@ def create_skeptic(id):
     "sighting_id": id
     } 
 
-    User.add_to_user_skeptics(data)
-    return redirect(f'/show/{id}') #redirect goes to route, render_template shows html page
+    print("SKEPTIC", User.get_one({"id":session['user_id']}).skeptic)
+
+
+    if (User.get_one({"id":session['user_id']}).skeptic == 0):
+        User.add_to_user_skeptics(data)  
+        User.get_one({"id":session['user_id']}).set_skeptic()
+        print("ok this worked",User.get_one({"id":session['user_id']}).skeptic)
+
+        
+    #inset into skeptic
+    return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
 
 
 

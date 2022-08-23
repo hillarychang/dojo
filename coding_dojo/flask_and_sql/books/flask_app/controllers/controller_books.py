@@ -15,7 +15,7 @@ def book():
 def show_book_authors(id):
     data = {"id":id}
     authors = Author.get_all()
-    books = Book.get_books_with_authors(data) #returns a dojo with a list of ninjas
+    books = Book.get_books_with_authors(data) #returns a book with a list of authors
     return render_template("book-favorites.html", book = books, all_authors = authors)
 
 

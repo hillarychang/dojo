@@ -18,6 +18,7 @@ class Book:
         self.authors = []
 
 
+#same as add_to_book_favorites
     @classmethod
     def add_to_author_favorites( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
         query = "INSERT INTO favorites ( author_id , book_id ) VALUES (%(authors_id)s, %(books_id)s);"
@@ -48,7 +49,7 @@ class Book:
                 "updated_at" : row_from_db["authors.updated_at"]
             }
             book.authors.append(authors.Author( author_data ) )
-        return book
+        return book #^get a list of authors that favorited the book
 
 # Now we use class methods to query our database
     @classmethod
@@ -61,17 +62,3 @@ class Book:
         return books #returns list of class objects (list of dictionaries)
             
 
-
-
-
-# class Book:
-    
-#     db='books' #dojo database (in mySQL workbench)
-
-#     def __init__( self , db_data ):
-#         self.id = db_data['id']
-#         self.first_name = db_data['first_name']
-#         self.last_name = db_data['last_name']
-#         self.age = db_data['age']
-#         self.created_at = db_data['created_at']
-#         self.updated_at = db_data['updated_at']

@@ -24,7 +24,7 @@ class Sighting: # model the class after the user table from our database
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']   #should i have this here??? yes. its a hidden input 
 
-        self.users = []
+        self.user = []
 
 
     def validate_sighting(sighting):
@@ -41,14 +41,38 @@ class Sighting: # model the class after the user table from our database
         return is_valid
 
 
-    #ADDED
+    # NOT NEEDED #ADDED
+    # @classmethod
+    # def add_to_sighting_skeptics( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
+    #     query = "INSERT INTO skeptic ( user_id , sighting_id ) VALUES (%(user_id)s, %(sighting_id)s);"
+    #     return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
+
+
+
+
+    # This method will retrieve the book with all the authors that are associated with the book.
     @classmethod
-    def add_to_sighting_skeptics( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
-        query = "INSERT INTO skeptic ( user_id , sighting_id ) VALUES (%(user_id)s, %(sighting_id)s);"
-        return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
+    def get_sightings_with_users( cls , data ):
+        query = "SELECT * FROM sighting LEFT JOIN skeptic ON skeptic.sighting_id = sighting.id LEFT JOIN user ON skeptic.user_id = user.id WHERE sighting.id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db( query , data )
+        # results will be a list of author objects with the book attached to each row. 
+        sighting = cls( results[0] )
+        for row_from_db in results:
+            
+            # Now we parse the author data to make instances of authors and add them into our list.
+            user_data = {
+                "id" : row_from_db["user.id"],
+                "first_name" : row_from_db["first_name"],
+                "last_name" : row_from_db["last_name"],
+                "email" : row_from_db["email"],
 
+                "password":row_from_db["password"],
 
-
+                "created_at" : row_from_db["user.created_at"],
+                "updated_at" : row_from_db["user.updated_at"]
+            }
+            sighting.user.append(user.User( user_data ) )
+        return sighting #^get a list of users for that sighting that are skeptical 
 
 
 

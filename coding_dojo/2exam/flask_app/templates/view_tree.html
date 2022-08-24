@@ -27,9 +27,9 @@
     <a href = "/log_out">Logout</a>
 
     <h1>{{tree.species}} planted by {{tree.created_at}}</h1> 
-    <p>What happened: </p>
-    <p>{{tree.what_happened}}</p>
-    <p>Number of Sasquatches: {{tree.number}}</p>
+    <p>Where {{tree.location}}</p>
+    <p>When {{tree.created_at}}</p>
+    <p>Reason: {{tree.reason}}</p>
 
 
     <hr>
@@ -37,24 +37,23 @@
 
 
 <!-- START EDITING -->
-    <p>Visitors:</p><br>
+    <p>Visited by:</p><br>
+    {% for one_user in tree_user.visitedUsers %}
+    <p>Visitor: {{one_user.first_name}} {{one_user.last_name}}</p>   
+    {% endfor %}
+
+<!-- 
+    <a href = "/create_visitor/{{tree.id}}">Did you visit this tree?</a>    -->
 
 
-
-
-    {% if curr_status == True %}
-        <a href = "/delete_skeptic/{{sighting.id}}">Delete It</a>
-    {% else %}
-        <a href = "/create_skeptic/{{sighting.id}}">Believe It</a>   
-    {% endif %}
+    {% if curr_status == False %}
+        <a href = "/create_visitor/{{tree.id}}">Did you visit this tree?</a>   
+    {% endif %} 
 
 <!-- find a way to dispalya all skeptics on page -->
 
     <!-- user_id &  sighting_id-->
 
-    {% for one_user in sighting_user.skepticalUsers %}
-        <p>Skeptics: {{one_user.first_name}} {{one_user.last_name}}</p>   
-    {% endfor %}
 
     
 

@@ -22,11 +22,9 @@ def show_tree_users(id):
     # print("status",status)
 
 
-
     tree_with_users = Tree.get_trees_with_visitors(data) #[sighting.PY]gives one specific sighting
-        #returns a sighting with a list of users
-    # sighting.users
-    return render_template("view_sighting.html", curr_status = status, tree_user = tree_with_users, tree = one_tree, users = current_user)
+
+    return render_template("view_tree.html", curr_status = status, tree_user = tree_with_users, tree = one_tree, users = current_user)
 
 
 # @app.route("/show/<int:id>") #runs show-one-user page
@@ -44,7 +42,7 @@ def show_tree_users(id):
 
 
 
-@app.route("/tree") #runs add recipe form
+@app.route("/tree") #runs add tree form
 def tree():
     
     trees = Tree.get_all()
@@ -53,7 +51,7 @@ def tree():
 
     #ADDED
     user = User.get_user_with_trees(data) #returns a user with a list of recipes
-    return render_template("add_sighting.html", all_trees = trees, users = user) 
+    return render_template("add_tree.html", all_trees = trees, users = user) 
 
 
 
@@ -77,7 +75,7 @@ def update_tree(id):
     }
 
     Tree.update(data)
-    return redirect('/showTree')
+    return redirect('/showUser')
     # return redirect(f'/show/{id}')
 
 
@@ -88,7 +86,7 @@ def edit_tree(id):
     trees = Tree.get_one(data)
     user = User.get_user_with_trees({'id':trees.user_id}) #returns a user with a list of recipes
 
-    return render_template("edit_sighting.html", tree = trees, users  = user)
+    return render_template("edit_tree.html", tree = trees, users  = user)
 
 
 

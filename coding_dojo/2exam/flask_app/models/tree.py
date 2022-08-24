@@ -25,6 +25,40 @@ class Tree: # model the class after the user table from our database
         self.user_id = data['user_id']   #should i have this here??? yes. its a hidden input 
 
         self.visitedUsers = [] # use this to determine if the user is a skeptic (many to many)
+        
+        self.numVisit = 0
+
+        self.planter = {"first_name" : "",
+                "last_name" : ""
+            }
+
+
+    # @classmethod
+    def amtVisitors(self):
+        return len(self.visitedUsers)
+
+    @classmethod
+    def findPlanterById(cls, data):
+        query = """
+            SELECT tree.*, user.first_name, user.last_name  
+            FROM tree 
+            JOIN user ON tree.user_id = user.id 
+            WHERE tree.id = %(tree_id)s;
+            """
+        results = connectToMySQL(cls.db).query_db( query , data )
+        # results will be a list of author objects with the book attached to each row. 
+        output = cls( results[0] )
+        for row_from_db in results:
+            
+            # Now we parse the author data to make instances of authors and add them into our list.
+            join_data = {
+                "first_name" : row_from_db["first_name"],
+                "last_name" : row_from_db["last_name"]
+            }
+            output.planter = ( join_data ) 
+
+        return output #^get a list of users for that sighting that are skeptical 
+
 
 
     def validate_tree(sighting):
@@ -57,8 +91,10 @@ class Tree: # model the class after the user table from our database
         results = connectToMySQL(cls.db).query_db( query , data )
         # results will be a list of author objects with the book attached to each row. 
         tree = cls( results[0] )
+
+        # count=0
         for row_from_db in results:
-            
+            # count += 1
             # Now we parse the author data to make instances of authors and add them into our list.
             user_data = {
                 "id" : row_from_db["user.id"],
@@ -72,6 +108,10 @@ class Tree: # model the class after the user table from our database
                 "updated_at" : row_from_db["user.updated_at"]
             }
             tree.visitedUsers.append(user.User( user_data ) )
+        tree.numVisit = len(tree.visitedUsers)
+
+        # tree.amtVisitors = count
+            #created list of visitors for specific tree
 
         return tree #^get a list of users for that sighting that are skeptical 
 
@@ -115,6 +155,25 @@ class Tree: # model the class after the user table from our database
         return var #returns list of class objects (list of dictionaries)
 
 
+
+    @classmethod
+    def getAmtVisitor(cls, data):
+
+        #*changed this method
+        query = "SELECT * FROM visitor WHERE tree_id = %(tree_id)s;"
+
+        results = connectToMySQL(cls.db).query_db(query, data) #results returns a list of dictionaries (key is column, value is row in specific column)
+        
+        return len(results)
+
+        # var = None
+        # print("length",len(results))
+        # if len(results) == 1:
+        #     var = True
+        # else:
+        #     var = False
+
+        # return var #returns list of class objects (list of dictionaries)
 
 
 # Now we use class methods to query our database

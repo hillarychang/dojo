@@ -25,6 +25,8 @@ class Recipe: # model the class after the user table from our database
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']   #should i have this here??? yes. its a hidden input 
 
+        # self.creator = #make 
+
 
     def validate_recipe(recipe):
         is_valid = True # we assume this is true

@@ -31,7 +31,7 @@ class User: # model the class after the user table from our database
 # ADDED
     @classmethod
     def add_to_user_visitors( cls , data ): #data comes from controller_ninjas.py in /create_ninja route
-        query = "INSERT INTO visitor ( user_id , visitor_id ) VALUES (%(user_id)s, %(visitor_id)s);"
+        query = "INSERT INTO visitor ( user_id , tree_id ) VALUES (%(user_id)s, %(tree_id)s);"
         return connectToMySQL(cls.db).query_db(query,data) #tablename or database name??
 
     @classmethod

@@ -16,20 +16,29 @@ app.secret_key = "shhh"
 
 
 
-@app.route("/delete_visitor/<int:id>") #runs add recipe form
-def delete_visitor(id):
-    data = {
-    "user_id":session['user_id'],
-    "tree_id": id
-    } 
+# @app.route("/delete_visitor/<int:id>") #runs add recipe form
+# def delete_visitor(id):
+#     data = {
+#     "user_id":session['user_id'],
+#     "tree_id": id
+#     } 
 
-    user = User.get_one({"id":session['user_id']})
+#     user = User.get_one({"id":session['user_id']})
 
 
-    tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
+#     tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
 
-    User.delete_user_visitors(data)  
-    return redirect(f'/show_tree_users/{id}') #redirect goes to route, render_template shows html page
+#     User.delete_user_visitors(data)  
+#     return redirect(f'/show_tree_users/{id}') #redirect goes to route, render_template shows html page
+
+
+@app.route("/showOne") #runs starting form
+def showOne():
+    
+    data = {"id":session['user_id']} # need user's id
+    user = User.get_user_with_trees(data) #returns a user with a list of recipes
+    print("HERE",user.trees)
+    return render_template("one_user.html", users = user) 
 
 
 
@@ -45,9 +54,11 @@ def create_visitor(id):
 
 
     tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
-
+    print("NOWHERE")
+#inserts into table visitor
     User.add_to_user_visitors(data)  
-            
+
+                
     #inset into skeptic
     return redirect(f'/show_tree_users/{id}') #redirect goes to route, render_template shows html page
 
@@ -103,13 +114,55 @@ def login():
     return redirect("/showUser")
 
 
+# @app.route("/showUser") #runs starting form
+# def showUser():
+    
+#     trees = Tree.get_all()
+#     data = {"id":session['user_id']} # need user's id
+#     user = User.get_user_with_trees(data) #returns a user with a list of trees
+    
+#     # len(.visitedUsers)
+
+#     # findPlanterById({"tree_id":})
+#     len()
+#     # amtVisit = Tree.getAmtVisitor({"tree_id":id})
+#     # print("amtVisit",amtVisit)
+
+#     return redirect("/showUser") 
+
+
 @app.route("/showUser") #runs starting form
 def showUser():
     
     trees = Tree.get_all()
     data = {"id":session['user_id']} # need user's id
-    user = User.get_user_with_trees(data) #returns a user with a list of recipes
+    user = User.get_user_with_trees(data) #returns a user with a list of trees
+    
+    # len(.visitedUsers)
+
+    # findPlanterById({"tree_id":})
+    # len()
+
+
+    # amtVisit = Tree.getAmtVisitor({"tree_id":id})
+    # print("amtVisit",amtVisit)
+
+
     return render_template("result.html", all_trees = trees, users = user) 
+
+
+
+# CORRECT FOR RESULT.HTML
+# @app.route("/showUser/<int:id>") #runs starting form
+# def showUser():
+    
+#     trees = Tree.get_all()
+#     data = {"id":session['user_id']} # need user's id
+#     user = User.get_user_with_trees(data) #returns a user with a list of recipes
+    
+#     planter = Tree.findPlanterById({"tree_id":id})
+
+#     return render_template("result.html", the_planter = planter, all_trees = trees, users = user) 
 
 
 

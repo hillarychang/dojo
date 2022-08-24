@@ -26,6 +26,30 @@ class User: # model the class after the user table from our database
         self.recipes=[]
 
 
+
+
+    @classmethod
+    def get_user_with_recipes( cls , data ):
+        query = "SELECT * FROM user LEFT JOIN recipe ON recipe.user_id = user.id WHERE user.id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db( query , data )
+        # results will be a list of topping objects with the ninja attached to each row. 
+        user = cls( results[0] )
+        for row_from_db in results:
+            # Now we parse the ninja data to make instances of ninjas and add them into our list.
+            recipe_data = {
+                "id" : row_from_db["recipe.id"],  #ninjas.__ because id overlaps with id in dojo
+                "name" : row_from_db["name"],
+                "under" : row_from_db["under"],
+                "description" : row_from_db["description"],
+                "instructions" : row_from_db["instructions"],
+                "user_id" : row_from_db['user_id'],
+                "created_at" : row_from_db["recipe.created_at"],
+                "updated_at" : row_from_db["recipe.updated_at"]
+                
+            }
+            user.recipes.append( recipe.Recipe( recipe_data ) )
+        return user     #returns an object with a list of posts inside 
+
 # REGISTRATION
     @classmethod
     def save(cls, data ):

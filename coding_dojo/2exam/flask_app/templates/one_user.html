@@ -24,31 +24,30 @@
             <p>A site to track randomly planted trees</p>
         </div>
     <div class = "second">
-        <a href = "/showOne">My Trees</a>
         <h1>Welcome {{users.first_name}}</h1>
         <!-- user is from controller_users.py -->
-        <a href = "/tree">Plant a Tree</a>
+        <a href = "/showUser">Dashboard</a>
         <a href = "/log_out">Logout</a>
     </div>
 </div>
 
 
+    <h1>Manage My Trees</h1>
+
     <table>
         <tr>
             <th>Species</th>
-            <th>Planted by</th>
-            <th>Visitors</th>
+            <th>Date Planted</th>
             <th>Actions</th>
         </tr>
 
-        {% for one_tree in all_trees %}
+        {% for one_tree in users.trees %}
         <tr>
             <td>{{one_tree.species}}</td>
-            <!--change  -->
-            <td>{{one_tree.user.first_name}}</td> 
-            <td>{{one_tree.numVisit}}</td>
+            <td>{{one_tree.created_at}}</td> 
             <td>Actions:
-                <a href = "/show_tree_users/{{one_tree.id}}">Details</a>
+                <a href = "/delete/{{one_tree.id}}">Delete</a>
+                <a href = "/edit/{{one_tree.id}}">Edit</a>
             </td>
             <hr>
         </tr>    

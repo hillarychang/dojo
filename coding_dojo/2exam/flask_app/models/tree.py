@@ -26,7 +26,7 @@ class Tree: # model the class after the user table from our database
 
         self.visitedUsers = [] # use this to determine if the user is a skeptic (many to many)
         
-        self.numVisit = 0
+        # self.numVisit = 0
 
         self.planter = {"first_name" : "",
                 "last_name" : ""
@@ -76,6 +76,39 @@ class Tree: # model the class after the user table from our database
 
 
 
+    def amt_visitors( self):
+        print("OKGOOD",self.numVisit)
+        # print("AGAIN", )
+        return self.numVisit
+
+
+    # This method will retrieve the book with all the authors that are associated with the book.
+    @classmethod
+    def get_num_visitors( cls , data ):
+        query = """
+            SELECT * 
+            FROM tree 
+            LEFT JOIN visitor ON visitor.tree_id = tree.id 
+            LEFT JOIN user ON visitor.user_id = user.id 
+            WHERE tree.id = %(id)s;
+            """
+        results = connectToMySQL(cls.db).query_db( query , data )
+        # results will be a list of author objects with the book attached to each row. 
+        tree = cls( results[0] )
+
+        count=0
+        for row_from_db in results:
+            count += 1
+        
+        print("LENGH",len(count))
+        tree.numVisit = count
+
+        # tree.amtVisitors = count
+            #created list of visitors for specific tree
+
+        return count #^get a list of users for that sighting that are skeptical 
+
+
 
 
     # This method will retrieve the book with all the authors that are associated with the book.
@@ -90,6 +123,8 @@ class Tree: # model the class after the user table from our database
             """
         results = connectToMySQL(cls.db).query_db( query , data )
         # results will be a list of author objects with the book attached to each row. 
+        
+        print("results",results)
         tree = cls( results[0] )
 
         # count=0
@@ -108,6 +143,8 @@ class Tree: # model the class after the user table from our database
                 "updated_at" : row_from_db["user.updated_at"]
             }
             tree.visitedUsers.append(user.User( user_data ) )
+        
+        print("LENGH",len(tree.visitedUsers))
         tree.numVisit = len(tree.visitedUsers)
 
         # tree.amtVisitors = count
@@ -187,7 +224,7 @@ class Tree: # model the class after the user table from our database
         
         trees = []      # Create an empty list to append our instances of users
         
-        print("RESULTS",results)
+        # print("RESULTS",results)
         for tree in results: # Iterate over the db results and create instances of users with cls.
             one_tree = cls(tree)
 

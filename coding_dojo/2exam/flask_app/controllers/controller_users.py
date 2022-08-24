@@ -54,7 +54,12 @@ def create_visitor(id):
 
 
     tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
-    print("NOWHERE")
+
+    num = Tree.amtVisitors
+    print("OK AMT VISITORS", num)
+
+    # session['tree_id'] = id #special added
+
 #inserts into table visitor
     User.add_to_user_visitors(data)  
 
@@ -134,21 +139,35 @@ def login():
 @app.route("/showUser") #runs starting form
 def showUser():
     
+
+    #NEED TREE_ID
+
+
     trees = Tree.get_all()
     data = {"id":session['user_id']} # need user's id
     user = User.get_user_with_trees(data) #returns a user with a list of trees
     
+    tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
+
+    num = Tree.amtVisitors
+
+
+    #clear
+    # session['tree_id'].clear()
+
+    for x in trees:
+        print("******SPEDIAL",x.amt_visitors())
+        print("ONEMORE",x.visitedUsers)
     # len(.visitedUsers)
 
     # findPlanterById({"tree_id":})
     # len()
 
-
     # amtVisit = Tree.getAmtVisitor({"tree_id":id})
     # print("amtVisit",amtVisit)
 
 
-    return render_template("result.html", all_trees = trees, users = user) 
+    return render_template("result.html", amt = num, all_trees = trees, users = user) 
 
 
 

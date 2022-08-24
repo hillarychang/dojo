@@ -32,7 +32,7 @@
     </div>
 </div>
 
-
+<!-- session['user_id'] = user_id -->
     <table>
         <tr>
             <th>Species</th>
@@ -45,8 +45,9 @@
         <tr>
             <td>{{one_tree.species}}</td>
             <!--change  -->
-            <td>{{one_tree.user.first_name}}</td> 
-            <td>{{one_tree.numVisit}}</td>
+            <td>{{one_tree.user.first_name}}</td>
+            <!-- {% print(one_tree.numVisit) %} -->
+            <td>{{amt}}</td>
             <td>Actions:
                 <a href = "/show_tree_users/{{one_tree.id}}">Details</a>
             </td>

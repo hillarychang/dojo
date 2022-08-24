@@ -24,7 +24,7 @@ class Sighting: # model the class after the user table from our database
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']   #should i have this here??? yes. its a hidden input 
 
-        self.user = []
+        self.skepticalUsers = [] # use this to determine if the user is a skeptic (many to many)
 
 
     def validate_sighting(sighting):
@@ -52,8 +52,14 @@ class Sighting: # model the class after the user table from our database
 
     # This method will retrieve the book with all the authors that are associated with the book.
     @classmethod
-    def get_sightings_with_users( cls , data ):
-        query = "SELECT * FROM sighting LEFT JOIN skeptic ON skeptic.sighting_id = sighting.id LEFT JOIN user ON skeptic.user_id = user.id WHERE sighting.id = %(id)s;"
+    def get_sightings_with_skeptics( cls , data ):
+        query = """
+            SELECT * 
+            FROM sighting 
+            LEFT JOIN skeptic ON skeptic.sighting_id = sighting.id 
+            LEFT JOIN user ON skeptic.user_id = user.id 
+            WHERE sighting.id = %(id)s;
+            """
         results = connectToMySQL(cls.db).query_db( query , data )
         # results will be a list of author objects with the book attached to each row. 
         sighting = cls( results[0] )
@@ -71,7 +77,8 @@ class Sighting: # model the class after the user table from our database
                 "created_at" : row_from_db["user.created_at"],
                 "updated_at" : row_from_db["user.updated_at"]
             }
-            sighting.user.append(user.User( user_data ) )
+            sighting.skepticalUsers.append(user.User( user_data ) )
+
         return sighting #^get a list of users for that sighting that are skeptical 
 
 
@@ -92,6 +99,28 @@ class Sighting: # model the class after the user table from our database
         return connectToMySQL(cls.db).query_db( query, data )
 
     
+
+
+    # Now we use class methods to query our database
+    @classmethod
+    def checkStatus(cls, data):
+
+        #*changed this method
+        query = "SELECT * FROM skeptic WHERE (user_id = %(user_id)s AND sighting_id = %(sighting_id)s);"
+
+        results = connectToMySQL(cls.db).query_db(query, data) #results returns a list of dictionaries (key is column, value is row in specific column)
+        
+
+        var = None
+        print("length",len(results))
+        if len(results) == 1:
+            var = True
+        else:
+            var = False
+
+        return var #returns list of class objects (list of dictionaries)
+
+
 
 
 # Now we use class methods to query our database

@@ -23,13 +23,20 @@ class User: # model the class after the user table from our database
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
     
-        self.sightings=[]
-        self.skeptic = 0
+        self.sightings=[] # one to many
+        self.status = False
+        # self.skeptics=[] # this is going to hold all the sightings this user is a skeptic of/don't need it (many to many)
+
+
+        # self.skeptic = 0 #THIS?!
 
 
 
-    def set_skeptic(self):
-        self._skeptic = 1
+    # def set_skeptic(self):
+    #     if (self.skeptic == 1):
+    #         self.skeptic = 0
+    #     else:
+    #         self.skeptic = 1
 
 
 

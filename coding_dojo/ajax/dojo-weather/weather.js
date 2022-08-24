@@ -1,8 +1,12 @@
 
 
+// http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&APPID=97bd75684cc7cf194dc007851d337d78
+
+// // Make sure to put your unique API key in the URL (taking out the brackets).
+// // &APPID={INSERTAPIKEY} will need to be at the end of each URL you access below and in the assignment.
 
 let getWeather = () => {
-    fetch("http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&APPID=97bd75684cc7cf194dc007851d337d78")
+    fetch("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=97bd75684cc7cf194dc007851d337d78")
     // Make sure to put your unique API key in the URL (taking out the brackets).
     // &APPID={INSERTAPIKEY} will need to be at the end of each URL you access below and in the assignment.
     .then(response => response.json() )

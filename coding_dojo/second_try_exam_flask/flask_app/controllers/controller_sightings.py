@@ -18,15 +18,15 @@ def show_sighting_users(id):
     one_sighting = Sighting.get_one(data)
     current_user = User.get_one({'id':session['user_id']})
 
-    
-    # users = User.get_all()
+    status = Sighting.checkStatus({"user_id":session['user_id'], "sighting_id":id})
+    print("status",status)
 
 
 
-    sighting_with_users = Sighting.get_sightings_with_users(data) #[sighting.PY]gives one specific sighting
+    sighting_with_users = Sighting.get_sightings_with_skeptics(data) #[sighting.PY]gives one specific sighting
         #returns a sighting with a list of users
     # sighting.users
-    return render_template("view_sighting.html", sighting_user = sighting_with_users, sighting = one_sighting, users = current_user)
+    return render_template("view_sighting.html", curr_status = status, sighting_user = sighting_with_users, sighting = one_sighting, users = current_user)
 
 
 # @app.route("/show/<int:id>") #runs show-one-user page

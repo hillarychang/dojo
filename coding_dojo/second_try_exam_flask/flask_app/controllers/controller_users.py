@@ -16,6 +16,23 @@ app.secret_key = "shhh"
 
 
 
+@app.route("/delete_skeptic/<int:id>") #runs add recipe form
+def delete_skeptic(id):
+    data = {
+    "user_id":session['user_id'],
+    "sighting_id": id
+    } 
+
+    user = User.get_one({"id":session['user_id']})
+
+
+    sighting = Sighting.get_sightings_with_skeptics({'id':id}) #[sighting.PY]gives one specific sighting
+
+    User.delete_user_skeptics(data)  
+    return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
+
+
+
 
 @app.route("/create_skeptic/<int:id>") #runs add recipe form
 def create_skeptic(id):
@@ -24,19 +41,13 @@ def create_skeptic(id):
     "sighting_id": id
     } 
 
-    print("SKEPTIC", User.get_one({"id":session['user_id']}).skeptic)
+    user = User.get_one({"id":session['user_id']})
 
 
-    if (User.get_one({"id":session['user_id']}).skeptic == 0):
-        User.add_to_user_skeptics(data)  
-        User.get_one({"id":session['user_id']}).set_skeptic()
-        print("ok this worked",User.get_one({"id":session['user_id']}).skeptic)
+    sighting = Sighting.get_sightings_with_skeptics({'id':id}) #[sighting.PY]gives one specific sighting
 
-    #this method should remove the user as a skeptic
-    if (User.get_one({"id":session['user_id']}).skeptic == 1):
-        User.delete_user_skeptics(data)  
-
-
+    User.add_to_user_skeptics(data)  
+            
     #inset into skeptic
     return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
 

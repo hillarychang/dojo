@@ -21,33 +21,33 @@
 
     <div class = "full">
         <div class = "first">
-            <h1>Sasquatch Websighting</h1>
+            <h1>Arbotrary</h1>
         </div>
         
         <div class = "second">
+            <a href = "/">My Trees</a>
             <h3>{{users.first_name}}</h3> 
             <a href = "/showUser">Dashboard</a><br>
             <a href = "/log_out">Logout</a>
         </div>
     </div>
 
-    <h3>Report a sighting</h3>
+    <h3>Arbitrarily Plant a Tree</h3>
 
     <form action="/create_sighting" method="post">
-        <label for="location">Location:</label><br>
+        <label for="species">species:</label><br>
+        <input type="text" name="species"> <br>   
+        
+        <label for="location">location:</label><br>
         <input type="text" name="location"> <br>   
         
-        <p>What Happened:</p><br>
-        <textarea name="what_happened" rows="10" cols="30">
-        </textarea><br>
-
-        <label for="created_at">Date of sighting:</label><br>
+        <label for="reason">reason:</label><br>
+        <input type="text" name="reason"> <br>   
+        
+        <label for="created_at">Date Planted:</label><br>
         <input type="date" id="created_at" name="created_at"><br>
 
-        <label for="number"># of Sasquatches:</label><br>
-        <input type="number" name="number"> <br>   
-
-        <button type="submit">Submit</button>
+        <button type="submit">Plant</button>
     </form> 
 
 

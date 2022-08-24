@@ -27,7 +27,7 @@ class Tree: # model the class after the user table from our database
         self.visitedUsers = [] # use this to determine if the user is a skeptic (many to many)
 
 
-    def validate_sighting(sighting):
+    def validate_tree(sighting):
         is_valid = True # we assume this is true
         if len(sighting['location']) < 1:
             flash("Location must not be blank.")

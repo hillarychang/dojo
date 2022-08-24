@@ -20,16 +20,44 @@
 
     <div class = "full">
         <div class = "first">
-            <h1>Sasquatch Websighting</h1>
+            <h1>Arbotrary</h1>
+            <p>A site to track randomly planted trees</p>
         </div>
     <div class = "second">
-        <h1>{{users.first_name}}</h1>
+        <a href = "/">My Trees</a>
+        <h1>Welcome {{users.first_name}}</h1>
         <!-- user is from controller_users.py -->
-        <a href = "/sighting">Report a Sighting</a>
+        <a href = "/sighting">Plant a Tree</a>
         <a href = "/log_out">Logout</a>
     </div>
 </div>
 
+
+    <table>
+        <tr>
+            <th>Species</th>
+            <th>Planted by</th>
+            <th>Visitors</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for one_tree in all_trees %}
+        <tr>
+            <td>{{one_tree.species}}</td> 
+            <td>{{one_tree.location}}</td> 
+            <td>{{one_tree.reason}}</td>
+            <td>Actions:
+                <a href = "/show/{{one_tree.id}}">Details</a>
+            </td>
+            <hr>
+        </tr>    
+        {% endfor %}
+
+
+    </table>
+
+
+<!-- 
 
 
     <h3>Reported Sightings</h3>
@@ -50,14 +78,13 @@
             <a href = "/show_sighting_users/{{one_sighting.id}}">View Sighting</a>
 
             
-            <!-- <a href = "/show/{{one_sighting.id}}">View Sighting</a> -->
             {% endif %}
             <hr> 
 
 
         {% endfor %}
 
-
+-->
 
 
 </body>

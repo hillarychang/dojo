@@ -19,17 +19,17 @@
     {% endif %}
     {% endwith %}
 
-    <h1>Sasquatch Websighting</h1> 
+    <h1>Arbotrary</h1> 
 
 
     <h3>{{users.first_name}}</h3> 
     <a href = "/showUser">Dashboard</a>
     <a href = "/log_out">Logout</a>
 
-    <h1>{{sighting.location}} on {{sighting.created_at}}</h1> 
+    <h1>{{tree.species}} planted by {{tree.created_at}}</h1> 
     <p>What happened: </p>
-    <p>{{sighting.what_happened}}</p>
-    <p>Number of Sasquatches: {{sighting.number}}</p>
+    <p>{{tree.what_happened}}</p>
+    <p>Number of Sasquatches: {{tree.number}}</p>
 
 
     <hr>
@@ -37,7 +37,7 @@
 
 
 <!-- START EDITING -->
-    <p>Skeptics:</p><br>
+    <p>Visitors:</p><br>
 
 
 

@@ -12,21 +12,21 @@ app.secret_key = "shhh"
 
 
 
-@app.route("/show_sighting_users/<int:id>")  #ID comes from -> check index.html route
-def show_sighting_users(id):
+@app.route("/show_tree_users/<int:id>")  #ID comes from -> check index.html route
+def show_tree_users(id):
     data = {"id":id}
-    one_sighting = Sighting.get_one(data)
+    one_tree = Tree.get_one(data)
     current_user = User.get_one({'id':session['user_id']})
 
-    status = Sighting.checkStatus({"user_id":session['user_id'], "sighting_id":id})
-    print("status",status)
+    status = Tree.checkStatus({"user_id":session['user_id'], "tree_id":id})
+    # print("status",status)
 
 
 
-    sighting_with_users = Sighting.get_sightings_with_skeptics(data) #[sighting.PY]gives one specific sighting
+    tree_with_users = Tree.get_trees_with_visitors(data) #[sighting.PY]gives one specific sighting
         #returns a sighting with a list of users
     # sighting.users
-    return render_template("view_sighting.html", curr_status = status, sighting_user = sighting_with_users, sighting = one_sighting, users = current_user)
+    return render_template("view_sighting.html", curr_status = status, tree_user = tree_with_users, tree = one_tree, users = current_user)
 
 
 # @app.route("/show/<int:id>") #runs show-one-user page
@@ -44,16 +44,16 @@ def show_sighting_users(id):
 
 
 
-@app.route("/sighting") #runs add recipe form
-def sighting():
+@app.route("/tree") #runs add recipe form
+def tree():
     
-    sightings = Sighting.get_all()
+    trees = Tree.get_all()
     data = {"id":session['user_id']} # need user's id
     # user = User.get_user_with_recipes(data) #returns a user with a list of posts
 
     #ADDED
-    user = User.get_user_with_sightings(data) #returns a user with a list of recipes
-    return render_template("add_sighting.html", all_sightings = sightings, users = user) 
+    user = User.get_user_with_trees(data) #returns a user with a list of recipes
+    return render_template("add_sighting.html", all_trees = trees, users = user) 
 
 
 
@@ -62,65 +62,65 @@ def sighting():
 
 #route to update
 @app.route("/update/<int:id>", methods=["POST"]) #deletes a user, doesn't run a page??
-def update_sighting(id):
+def update_tree(id):
 
-    if not Sighting.validate_sighting(request.form): #request.form  (check user.py)
+    if not Tree.validate_tree(request.form): #request.form  (check user.py)
         return redirect('/update/<int:id>')
 
     data = {
         'id':id,
-        "location": request.form["location"],
-        "what_happened" : request.form["what_happened"],
-        "number" : request.form["number"],
+        "species": request.form["species"],
+        "location" : request.form["location"],
+        "reason" : request.form["reason"],
         "created_at" : request.form["created_at"]
 
     }
 
-    Sighting.update(data)
-    return redirect('/showUser')
+    Tree.update(data)
+    return redirect('/showTree')
     # return redirect(f'/show/{id}')
 
 
 @app.route("/edit/<int:id>") #update a user, runs edit page
-def edit_sighting(id):
+def edit_tree(id):
 
     data = {'id':id}
-    sightings = Sighting.get_one(data)
-    user = User.get_user_with_sightings({'id':sightings.user_id}) #returns a user with a list of recipes
+    trees = Tree.get_one(data)
+    user = User.get_user_with_trees({'id':trees.user_id}) #returns a user with a list of recipes
 
-    return render_template("edit_sighting.html", sighting = sightings, users  = user)
-
-
+    return render_template("edit_sighting.html", tree = trees, users  = user)
 
 
 
 
-@app.route('/create_sighting', methods=["POST"])
-def create_recipe():
+
+
+@app.route('/create_tree', methods=["POST"])
+def create_tree():
     # First we make a data dictionary from our request.form coming from our template.
     # The keys in data need to line up exactly with the variables in our query string.
     
-    if not Sighting.validate_sighting(request.form): #request.form  (check user.py)
-        return redirect('/create_sighting') #???
+    if not Tree.validate_tree(request.form): #request.form  (check user.py)
+        return redirect('/create_tree') #???
 
     
     data = {
 
+            "species" : request.form["species"],
             "location" : request.form["location"],
-            "what_happened" : request.form["what_happened"],
-            "number" : request.form["number"],
+            "reason" : request.form["reason"],
             "user_id": session['user_id'],
             "created_at": request.form["created_at"] #added this
 
     }
     # We pass the data dictionary into the save method from the Nina class.
-    id = Sighting.save(data)
+    id = Tree.save(data)
     return redirect('/showUser') 
 
 
 
 @app.route("/delete/<int:id>") #deletes a user, doesn't run a page??
-def delete_sighting(id):
+def delete_tree(id):
     data = {'id':id}
-    Sighting.delete(data)
+    Tree.delete(data)
     return redirect('/showUser')

@@ -16,40 +16,40 @@ app.secret_key = "shhh"
 
 
 
-@app.route("/delete_skeptic/<int:id>") #runs add recipe form
-def delete_skeptic(id):
+@app.route("/delete_visitor/<int:id>") #runs add recipe form
+def delete_visitor(id):
     data = {
     "user_id":session['user_id'],
-    "sighting_id": id
+    "tree_id": id
     } 
 
     user = User.get_one({"id":session['user_id']})
 
 
-    sighting = Sighting.get_sightings_with_skeptics({'id':id}) #[sighting.PY]gives one specific sighting
+    tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
 
-    User.delete_user_skeptics(data)  
-    return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
-
-
+    User.delete_user_visitors(data)  
+    return redirect(f'/show_tree_users/{id}') #redirect goes to route, render_template shows html page
 
 
-@app.route("/create_skeptic/<int:id>") #runs add recipe form
-def create_skeptic(id):
+
+
+@app.route("/create_visitor/<int:id>") #runs add recipe form
+def create_visitor(id):
     data = {
     "user_id":session['user_id'],
-    "sighting_id": id
+    "tree_id": id
     } 
 
     user = User.get_one({"id":session['user_id']})
 
 
-    sighting = Sighting.get_sightings_with_skeptics({'id':id}) #[sighting.PY]gives one specific sighting
+    tree = Tree.get_trees_with_visitors({'id':id}) #[sighting.PY]gives one specific sighting
 
-    User.add_to_user_skeptics(data)  
+    User.add_to_user_visitors(data)  
             
     #inset into skeptic
-    return redirect(f'/show_sighting_users/{id}') #redirect goes to route, render_template shows html page
+    return redirect(f'/show_tree_users/{id}') #redirect goes to route, render_template shows html page
 
 
 
@@ -106,10 +106,10 @@ def login():
 @app.route("/showUser") #runs starting form
 def showUser():
     
-    sightings = Sighting.get_all()
+    trees = Tree.get_all()
     data = {"id":session['user_id']} # need user's id
-    user = User.get_user_with_sightings(data) #returns a user with a list of recipes
-    return render_template("result.html", all_sightings = sightings, users = user) 
+    user = User.get_user_with_trees(data) #returns a user with a list of recipes
+    return render_template("result.html", all_trees = trees, users = user) 
 
 
 
@@ -124,7 +124,6 @@ def index():
 @app.route("/log_out") 
 def log_out():
     session.clear()
-    # session["counter"] = 1
     return redirect('/')
 
 

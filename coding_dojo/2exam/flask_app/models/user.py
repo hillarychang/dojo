@@ -1,7 +1,7 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import sighting
+from flask_app.models import tree
 
 from flask_app import app
 from flask_bcrypt import Bcrypt   
@@ -184,8 +184,8 @@ class User: # model the class after the user table from our database
                 "location" : row_from_db["location"],
                 "reason" : row_from_db["reason"],
                 "user_id" : row_from_db['user_id'],
-                "created_at" : row_from_db["sighting.created_at"],
-                "updated_at" : row_from_db["sighting.updated_at"]
+                "created_at" : row_from_db["tree.created_at"],
+                "updated_at" : row_from_db["tree.updated_at"]
                 
             }
             user.trees.append( tree.Tree( tree_data ) )

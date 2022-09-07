@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/static/profile.css">
+
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Profile</h1> 
+
+
+    <h3>Welcome, {{user.first_name}}</h3> 
+    <a href = "/showUser">Dashboard</a>
+    <a href = "/log_out">Logout</a>
+
+    <h1>{{this_user.first_name}} {{this_user.last_name}}</h1> 
+    
+    
+    {% for one_user in user_follower.followers %}
+        <p>Followed by: {{one_user.first_name}} {{one_user.last_name}}</p>   
+    {% endfor %}
+
+
+    {% if this_user.id != user.id %} 
+        {% if curr_status == False %}
+            <a href = "/create_follower/{{this_user.id}}">follow</a>
+        {% endif %} 
+    {% endif %} 
+    
+    <hr>
+<!-- CHANGE THESE: -->
+    <p>this_user profile pic</p>
+    <p>num of posts</p>
+    <p>num of followers</p>
+    <p>num of following</p>
+    <p>this_user bio</p>
+    <hr> 
+
+<!-- START EDITING -->
+
+    {% for one_post in all_posts %}
+
+        {% if this_user.id == one_post.user_id %}
+
+            <p>{{one_post.text}}</p>
+            <p>Posted by: {{one_post.user.first_name}} {{one_post.user.last_name}} </p>
+            
+            {% if user.id == one_post.user_id %}
+                <a href = "/edit/{{one_post.id}}">Edit</a>
+                <a href = "/delete/{{one_post.id}}">Delete</a>          
+            {% endif %}
+
+
+<!-- edit this part -->
+            <!-- {% for one_user in post_user.likedUsers %}
+                <p>Liked by: {{one_user.first_name}} {{one_user.last_name}}</p>   
+            {% endfor %}
+-->
+
+
+            {% if one_post.user_id != user.id %} 
+                {% if curr_status == False %}
+                    <a href = "/create_like/{{one_post.id}}">Like this post?</a>   
+                {% endif %} 
+            {% endif %} 
+
+
+        {% endif %}
+
+
+
+
+        <!-- from view_post.html -->
+        <!-- <a href = "/show_post_users/{{one_post.id}}">View Post</a> -->
+
+    {% endfor %}
+
+
+
+
+
+</body>
+</html>

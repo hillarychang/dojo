@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/static/view_post.css">
+
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1>Posts</h1> 
+
+
+    <h3>{{user.first_name}}</h3> 
+    <a href = "/showUser">Dashboard</a>
+    <a href = "/log_out">Logout</a>
+
+    <h1>{{post.text}} posted by {{spec_post.poster.first_name}}</h1> 
+    <!-- ^"post.user.first_name" -->
+    <!-- ^change: FIX user.first_name to make it user who posted -->
+    <!-- have to change post.get_one similar to post.get_all -->
+    <p>{{post.created_at}}</p>
+    <hr>
+
+
+
+<!-- START EDITING -->
+    {% for one_user in post_user.likedUsers %}
+    <p>Liked by: {{one_user.first_name}} {{one_user.last_name}}</p>   
+    {% endfor %}
+
+
+    {% if post.user_id != user.id %} 
+        {% if curr_status == False %}
+            <a href = "/create_like/{{post.id}}">Like this post?</a> 
+        {% elif curr_status == True %}
+            <a href = "/delete_like/{{post.id}}">Unlike this post?</a> 
+        {% endif %} 
+    {% endif %} 
+
+
+
+
+</body>
+</html>

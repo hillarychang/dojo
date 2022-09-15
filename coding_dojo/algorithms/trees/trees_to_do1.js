@@ -8,13 +8,11 @@ class BTNode {
 
 
 class BST {
+
     constructor() {
     this.root = null;
     }
 
-
-    9
-    [6, 8,10,12 ]
 
 //     BST: Add
 // Create an add(val) method on the BST object to add new value to the tree. This entails creating a BTNode with this value and connecting it at the appropriate place in the tree. Unless specified otherwise, BSTs can contain duplicate values.
@@ -27,41 +25,84 @@ class BST {
         let new_node = new BTNode(val);
         let runner=this.root
 
-        if(!this.root) {
-            this.root = new_node;
-            return this;
+        if(this.root != null) {
+
+            while(runner !== null){
+                if (new_node.val < runner.val){  //if val smaller than runner
+
+                    if (runner.right != null){
+                        runner = runner.right;    
+                    }
+                    else { //runner.right == null
+                        runner.right = new_node;
+                        return this;
+                    }
+                }
+
+                else{  //if val larger than runner
+                    if (runner.left != null){
+                        runner = runner.left;    
+                    }
+                    else { //runner.right == null
+                        runner.left = new_node;
+                        return this;
+                    }
+                }
+
+                }
+
+
+
+        this.node = new_node;
         }
 
-
-        while(runner !== null){
-        if (new_node.val < runner.val){  //if larger than runner
-            new_node.left = runner;
-            runner.right = new_node;
-            runner = new_node;
         }
-
-        runner=runner.next
-
-        }
-
-    }
+    
 
 
     // BST: Contains
     // Create a contains(val) method on BST that returns whether the tree contains a given value. Take advantage of the BST structure to make this a much more rapid operation than SList.contains() would be.
     contains(val){
-        
 
-
+        var runner = this.root;
+        while(runner !== null){
+            if (new_node.val == runner.val){  //if val == runner
+                return true;
+            }
+            else if (new_node.val < runner.val){
+                if (runner.left == null){
+                    return false;
+                }
+                runner = runner.left;    
+            }
+            else { //runner.right == null
+                if (runner.left == null){
+                    return false;
+                }
+                runner = runner.right;    
+            }
+        }
     }
 
 
 
     // BST: Min
     // Create a min() method on the BST class that returns the smallest value found in the BST.
-    min(){
-        
+    min(){ //go to most left        
 
+        
+        var runner = this.root;
+        var min = this.root.val;
+
+        while(runner.left !== null){
+
+            if (min < runner.left.val){
+                min  = runner.left.val;
+            }
+            runner = runner.left; 
+
+        }
+        return min;
 
     }
 
@@ -69,8 +110,53 @@ class BST {
 
     // BST: Max
     // Create a max() BST method that returns the largest value contained in the binary search tree.
-    max(){
+    max(){//go to most right
+
+        var runner = this.root;
+        var max = this.root.val;
+
+        while(runner.right !== null){
+
+            if (max > runner.right.val){
+                max  = runner.right.val;
+            }
+            runner = runner.right; 
+
+        }
+        return max;
+
+    }
+
+    size() {
+        if (this.root === null) {
+            return 0;
+        }
+        function sizeHelp(runner) {
+            if (!runner) {
+                return 0;
+            }
+            return 1 + sizeHelp(runner.left) + sizeHelp(runner.right);
+        }
+        return sizeHelp(this.root);
+    }
+
+    
+
+    isEmpty() {
+        if(this.root != null) {
+            return false
+        }
+        return true
+    }
+
+
+
         
+
+
+
+
+
 
 
 
@@ -78,9 +164,6 @@ class BST {
 
 
 
-
-
-}
 
 
 BST1 = new BST()
